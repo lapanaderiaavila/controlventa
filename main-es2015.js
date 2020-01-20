@@ -30,7 +30,18 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n</div>\n  \n<form class=\"container form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n\t<div class=\"form-group row\" *ngIf=\"orden\" class=\"table-responsive-lg\">\nestoy por publicarlo, solo tengo q actualizar el el ID del documento en el codigo\nver si puedo hacer un gitlab con la cuenta de esteban\n\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<BR/>\n\t\t<div class=\"form-group row\">\n\t\t\t<div class=\"col-md-3 px-md-4\">\n\t\t\t\t<label>Producto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Producto\" class=\"form-control\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onProductSelected($event.option.value)\">\n\t\t\t\t\t<!--product is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a product  --->\n\t\t\t\t\t<mat-option *ngFor=\"let detalleOrden of filteredProducts | async\" [value]=\"detalleOrden\">\n\t\t\t\t\t\t{{detalleOrden.producto.nombre}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-3\">\n\t\t\t\t<label>Precio</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Precio\" class=\"form-control\" [(ngModel)]=\"manualDetalleOrden.producto.precio\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualDetalleOrden.producto.id > 0\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2\">\n\t\t\t\t<label>Vendido</label>\n\t\t\t\t<input type=\"number\" placeholder=\"Vendido\" class=\"form-control\" [(ngModel)]=\"manualDetalleOrden.vendido\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<label>TOTAL:</label><BR/>\n\t\t\t\t<label>{{ manualDetalleOrden.total }}</label>\n\t\t\t</div>\n\t\t\t<div class=\"col col-md-2 text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addProductToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th scope=\"col\"><h6>Producto</h6></th>\n\t\t\t\t\t<th scope=\"col\"><h6>Vendido</h6></th>\n\t\t\t\t\t<th scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody *ngIf=\"orden.detalleOrdenList\">\n\t\t\t\t<tr *ngFor=\"let detalleOrden of orden.detalleOrdenList\">\n\t\t\t\t\t<td scope=\"row\" class=\"text-nowrap\" style=\"padding-right: 0px;\">\n\t\t\t\t\t\t<h6>\n\t\t\t\t\t\t\t{{ detalleOrden.producto.nombre }}\n\t\t\t\t\t\t\t<small>({{ detalleOrden.producto.precio }})</small>\n\t\t\t\t\t\t</h6>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding-left: 2px; padding-right: 0px;\">\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-danger btn-number btn-sm\" data-type=\"minus\" (click)=\"detalleOrden.minusVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-minus\" style=\"padding-left: 1rem; padding-right: 1rem;\">-</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t<input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 50px;\" [(ngModel)]=\"detalleOrden.vendido\" [ngModelOptions]=\"{standalone: true}\"\n\t\t\t\t\t\t\t\t\t(ngModelChange)=\"detalleOrden.onChangeVendido($event)\" onclick=\"this.select();\" [disabled]=\"guardando\"/>\n\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-success btn-number btn-sm\" data-type=\"plus\" (click)=\"detalleOrden.addVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-plus\" style=\"padding-left: 1rem; padding-right: 1rem;\">+</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t<h6 class=\"text-right\">{{ detalleOrden.total }}</h6>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td colspan=\"2\" class=\"text-right\">\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" style=\"margin-right: 20px;\"\n\t\t\t\t\t\t\t(click)=\"registrarVenta()\">\n\t\t\t\t\t\t\tGuardar\n\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnTipoPago\" (click)=\"orden.toggleTipoPago()\">\n\t\t\t\t\t\t\t{{orden.tipoPago}}\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t\t<h5>{{orden.total}}</h5>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\n</form>\n"
+module.exports = "\n<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n</div>\n  \n<form class=\"container form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n\t<div class=\"form-group row\" *ngIf=\"orden\" class=\"table-responsive-lg\">\n\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<BR/>\n\t\t<div class=\"form-group row\">\n\t\t\t<div class=\"col-md-3 px-md-4\">\n\t\t\t\t<label>Producto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Producto\" class=\"form-control\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onProductSelected($event.option.value)\">\n\t\t\t\t\t<!--product is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a product  --->\n\t\t\t\t\t<mat-option *ngFor=\"let detalleOrden of filteredProducts | async\" [value]=\"detalleOrden\">\n\t\t\t\t\t\t{{detalleOrden.producto.nombre}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-3\">\n\t\t\t\t<label>Precio</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Precio\" class=\"form-control\" [(ngModel)]=\"manualDetalleOrden.producto.precio\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualDetalleOrden.producto.id > 0\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2\">\n\t\t\t\t<label>Vendido</label>\n\t\t\t\t<input type=\"number\" placeholder=\"Vendido\" class=\"form-control\" [(ngModel)]=\"manualDetalleOrden.vendido\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1\">\n\t\t\t\t<label>TOTAL:</label><BR/>\n\t\t\t\t<label>{{ manualDetalleOrden.total }}</label>\n\t\t\t</div>\n\t\t\t<div class=\"col col-md-2 text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addProductToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr>\n\t\t\t\t\t<th scope=\"col\"><h6>Producto</h6></th>\n\t\t\t\t\t<th scope=\"col\"><h6>Vendido</h6></th>\n\t\t\t\t\t<th scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody *ngIf=\"orden.detalleOrdenList\">\n\t\t\t\t<tr *ngFor=\"let detalleOrden of orden.detalleOrdenList\">\n\t\t\t\t\t<td scope=\"row\" class=\"text-nowrap\" style=\"padding-right: 0px;\">\n\t\t\t\t\t\t<h6>\n\t\t\t\t\t\t\t{{ detalleOrden.producto.nombre }}\n\t\t\t\t\t\t\t<small>({{ detalleOrden.producto.precio }})</small>\n\t\t\t\t\t\t</h6>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding-left: 2px; padding-right: 0px;\">\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-danger btn-number btn-sm\" data-type=\"minus\" (click)=\"detalleOrden.minusVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-minus\" style=\"padding-left: 1rem; padding-right: 1rem;\">-</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t<input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 50px;\" [(ngModel)]=\"detalleOrden.vendido\" [ngModelOptions]=\"{standalone: true}\"\n\t\t\t\t\t\t\t\t\t(ngModelChange)=\"detalleOrden.onChangeVendido($event)\" onclick=\"this.select();\" [disabled]=\"guardando\"/>\n\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-success btn-number btn-sm\" data-type=\"plus\" (click)=\"detalleOrden.addVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-plus\" style=\"padding-left: 1rem; padding-right: 1rem;\">+</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t<h6 class=\"text-right\">{{ detalleOrden.total }}</h6>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td colspan=\"2\" class=\"text-right\">\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" style=\"margin-right: 20px;\"\n\t\t\t\t\t\t\t(click)=\"registrarVenta()\">\n\t\t\t\t\t\t\tGuardar\n\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnTipoPago\" (click)=\"orden.toggleTipoPago()\">\n\t\t\t\t\t\t\t{{orden.tipoPago}}\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t\t<h5>{{orden.total}}</h5>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\n</form>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/gastos-component/gastos-component.component.html":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/gastos-component/gastos-component.component.html ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n\t<div class=\"form-group row\" class=\"table-responsive-lg\">\n\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<BR/>\n\t\t<div class=\"form-group row\">\n\t\t\t<div class=\"col-md-5 px-md-4\">\n\t\t\t\t<label>Concepto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Concepto\" class=\"form-control\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onConceptoSelected($event.option.value)\">\n\t\t\t\t\t<!--concepto is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a concepto  --->\n\t\t\t\t\t<mat-option *ngFor=\"let gasto of filteredGastos | async\" [value]=\"gasto\">\n\t\t\t\t\t\t{{gasto.concepto}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2\">\n\t\t\t\t<label style=\"width: 100%; text-align: center;\">Recurrente</label>\n\t\t\t\t<input type=\"checkbox\" class=\"form-control\" [(ngModel)]=\"manualGasto.recurrente\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualGasto.id > 0\"/>\n\t\t\t</div>\n            <div class=\"col-md-3\">\n\t\t\t\t<label>Monto Pagado</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Monto\" class=\"form-control\" [(ngModel)]=\"manualGasto.montoPagado\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col col-md-1 text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addGastoToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr>\n                    <th scope=\"col\"><h6>Concepto</h6></th>\n                    <th scope=\"col\"><h6>Recurrencia</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Referencia</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Fecha</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Pagado</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let gasto of allGastos\">\n\t\t\t\t\t<td scope=\"row\" class=\"text-nowrap\" style=\"text-align: left;\">\n\t\t\t\t\t\t<h6>\n\t\t\t\t\t\t\t{{ gasto.concepto }}\n\t\t\t\t\t\t</h6>\n\t\t\t\t\t</td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: left;\">\n\t\t\t\t\t\t\t{{ gasto.recurrencia }}\n\t\t\t\t\t\t</h6>\n                    </td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n\t\t\t\t\t\t\t{{ gasto.montoReferencia | currency }}\n\t\t\t\t\t\t</h6>\n                    </td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n                            {{ gasto.fechaPagado | date }} \n                        </h6>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n                            {{ gasto.montoPagado | currency }} \n                        </h6>\n\t\t\t\t\t</td>\n                </tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n"
 
 /***/ }),
 
@@ -323,12 +334,15 @@ let AppComponent = AppComponent_1 = class AppComponent {
 };
 AppComponent.valueInputOption = "USER_ENTERED"; // RAW => https://developers.google.com/sheets/api/guides/values
 AppComponent.valueRenderOption = "UNFORMATTED_VALUE"; // RAW => https://developers.google.com/sheets/api/reference/rest/v4/ValueRenderOption
-//private static spreadsheetId = '1oajvWQJIqPETOX-FxzFNvTcwf1K2KeuNnGKJ-aHGDmo'; // ID of Esteban spreadsheet
-AppComponent.spreadsheetId = '19ltkEfpGBfd7xiPx9UlpGwyhV2v-diAMgFom8XVrhD4'; // ID of Pedros spreadsheet
+AppComponent.dateTimeRenderOption = "FORMATTED_STRING"; // https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption
+//private static spreadsheetId = '1oajvWQJIqPETOX-FxzFNvTcwf1K2KeuNnGKJ-aHGDmo'; // ID of Esteban spreadsheet vrs1, se toma del URL
+//private static spreadsheetId = '19ltkEfpGBfd7xiPx9UlpGwyhV2v-diAMgFom8XVrhD4'; // ID of Pedro spreadsheet vrs2, se toma del URL
+AppComponent.spreadsheetId = '1B5cYzMJ4vc6ewk9RODCUqIVlYFqkWDrLToXrsUHIALs'; // ID of Esteban spreadsheet vrs2, se toma del URL
 AppComponent.rangeControlVentaAddRow = 'ControlVenta!A2';
 AppComponent.rangeCatalogosProductos = 'CatalogoProductos!A2:E';
 AppComponent.rangeCatalogosProductosAddRow = 'CatalogoProductos!A';
-AppComponent.controlVentaSheetId = 1798969314;
+//private static controlVentaSheetId = 1798969314; // id de las versiones viejas, viene en el URL "#gid=0"
+AppComponent.controlVentaSheetId = 0; // id de las versiones nuevas, viene en el URL "#gid=0"
 AppComponent.ctorParameters = () => [
     { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
@@ -365,6 +379,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
 /* harmony import */ var _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/autocomplete */ "./node_modules/@angular/material/esm2015/autocomplete.js");
+/* harmony import */ var _gastos_component_gastos_component_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./gastos-component/gastos-component.component */ "./src/app/gastos-component/gastos-component.component.ts");
+
 
 
 
@@ -382,7 +398,8 @@ let AppModule = class AppModule {
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
+            _gastos_component_gastos_component_component__WEBPACK_IMPORTED_MODULE_9__["GastosComponentComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -396,9 +413,198 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             { provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["APP_INITIALIZER"], useFactory: initGapi, deps: [_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_6__["GapiSession"]], multi: true },
             _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_6__["GapiSession"]
         ],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"], _gastos_component_gastos_component_component__WEBPACK_IMPORTED_MODULE_9__["GastosComponentComponent"]]
     })
 ], AppModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/gastos-component/gastos-component.component.css":
+/*!*****************************************************************!*\
+  !*** ./src/app/gastos-component/gastos-component.component.css ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dhc3Rvcy1jb21wb25lbnQvZ2FzdG9zLWNvbXBvbmVudC5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/gastos-component/gastos-component.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/gastos-component/gastos-component.component.ts ***!
+  \****************************************************************/
+/*! exports provided: GastosComponentComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GastosComponentComponent", function() { return GastosComponentComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/gasto.model */ "./src/models/gasto.model.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+var GastosComponentComponent_1;
+
+
+
+
+
+
+
+
+
+let GastosComponentComponent = GastosComponentComponent_1 = class GastosComponentComponent {
+    constructor(gapiSession, ngZone) {
+        this.gapiSession = gapiSession;
+        this.ngZone = ngZone;
+        this.allGastos = [];
+        this.gastosRecurrentes = [];
+        this.gastosOcasionales = [];
+        this.manualGasto = _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"].createEmptyGasto();
+        this.control = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](); //used for the autocomplete text
+    }
+    ngOnInit() {
+        if (!this.gapiSession.isSignedIn) {
+            // use this to refresh the credentials
+            //this.gapiSession.signOut();
+            this.gapiSession.signIn();
+        }
+        this._loadGastosRecurrentes().subscribe(gastosRange => {
+            // necessary to run insice the zone in order to fire the change detection
+            this.ngZone.run(() => {
+                var listaGastos = gastosRange.result["values"];
+                if (listaGastos) {
+                    for (let i = 0; i < listaGastos.length; i++) {
+                        var gastoFromSheet = listaGastos[i];
+                        var gasto = new _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"](gastoFromSheet[0], true, gastoFromSheet[1], gastoFromSheet[2], gastoFromSheet[4], gastoFromSheet[3], gastoFromSheet[5]);
+                        this.gastosRecurrentes.push(gasto);
+                        this.allGastos.push(gasto);
+                    }
+                }
+            });
+        });
+        this._loadGastosOcasionales().subscribe(gastosRange => {
+            // necessary to run insice the zone in order to fire the change detection
+            this.ngZone.run(() => {
+                var listaGastos = gastosRange.result["values"];
+                if (listaGastos) {
+                    for (let i = 0; i < listaGastos.length; i++) {
+                        var gastoFromSheet = listaGastos[i];
+                        // 0 = id, 1 = Concepto, 2 = Fecha Pagado, 3 = Monto Pagado
+                        var gasto = new _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"](gastoFromSheet[0], false, gastoFromSheet[1], null, gastoFromSheet[2], null, gastoFromSheet[3]);
+                        this.gastosOcasionales.push(gasto);
+                        this.allGastos.push(gasto);
+                    }
+                }
+            });
+        });
+        // the value in control is an string while the user is typing, once the users selects a product from the list, it will be a DetalleOrden
+        this.filteredGastos = this.control.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(display => display ? this._filter(display instanceof _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"] ? display.concepto : display) : this.allGastos.slice()));
+    }
+    _loadGastosRecurrentes() {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(gapi.client.request({
+            method: 'GET',
+            // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+            path: `https://sheets.googleapis.com/v4/spreadsheets/${_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].spreadsheetId}/values/${GastosComponentComponent_1.rangeGastosRecurrentes}?valueRenderOption=${_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].valueRenderOption}&dateTimeRenderOption=${_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].dateTimeRenderOption}`
+        }));
+    }
+    _loadGastosOcasionales() {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(gapi.client.request({
+            method: 'GET',
+            // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+            path: `https://sheets.googleapis.com/v4/spreadsheets/${_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].spreadsheetId}/values/${GastosComponentComponent_1.rangeGastosOcasionales}?valueRenderOption=${_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].valueRenderOption}&dateTimeRenderOption=${_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].dateTimeRenderOption}`
+        }));
+    }
+    _filter(value) {
+        if (value) {
+            const filterValue = this._normalizeValue(value);
+            const gastosMatched = this.allGastos
+                .filter(g => this._normalizeValue(g.concepto).includes(filterValue));
+            return gastosMatched;
+        }
+        return [];
+    }
+    _normalizeValue(value) {
+        return value ? value.toLowerCase().replace(/\s/g, '') : "";
+    }
+    displayFn(gasto) {
+        return gasto ? gasto.concepto : undefined;
+    }
+    onConceptoSelected(gastoSelected) {
+        this.manualGasto = gastoSelected;
+    }
+    addGastoToTable() {
+        // first lets validate the data
+        if (!this.control.value ||
+            this.manualGasto.montoPagado <= 0) {
+            return;
+        }
+        this.manualGasto.fechaPagado = new Date();
+        if (this.manualGasto.id <= 0) {
+            // if it gets here, means the gasto has not been registered so we need to add it into the ControlGastosRecurrentes or ControlGastosOcasionales catalog (+1 because of the header)
+            this.manualGasto.concepto = this.control.value;
+            this.manualGasto.id = this.manualGasto.recurrente ? this.gastosRecurrentes.length + 1 : this.gastosOcasionales.length + 1;
+        }
+        // determine the row where to insert or update the info
+        var rowIndexToUpdate = GastosComponentComponent_1.rangeGastosOcasionalesAddRow + (this.manualGasto.id > 0 ? (1 + this.manualGasto.id) : (2 + this.gastosOcasionales.length));
+        if (this.manualGasto.recurrente) {
+            rowIndexToUpdate = GastosComponentComponent_1.rangeGastosRecurrentesAddRow + (this.manualGasto.id > 0 ? (1 + this.manualGasto.id) : (2 + this.gastosRecurrentes.length));
+            this.manualGasto.montoReferencia = this.manualGasto.montoPagado;
+        }
+        const self = this;
+        gapi.client.request({
+            method: 'POST',
+            // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
+            path: `https://sheets.googleapis.com/v4/spreadsheets/${_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].spreadsheetId}/values:batchUpdate`,
+            body: {
+                valueInputOption: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].valueInputOption,
+                data: [
+                    {
+                        range: rowIndexToUpdate,
+                        values: [
+                            self.manualGasto.getRowForGastos()
+                        ]
+                    }
+                ]
+            }
+        }).then(function (response) {
+            self.ngZone.run(() => {
+                self.allGastos.push(self.manualGasto);
+                if (self.manualGasto.recurrente) {
+                    self.gastosRecurrentes.push(self.manualGasto);
+                }
+                else {
+                    self.gastosOcasionales.push(self.manualGasto);
+                }
+                // clean the new product information to enter a new one
+                self.manualGasto = _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"].createEmptyGasto();
+                self.control.setValue("");
+            });
+        });
+    }
+};
+GastosComponentComponent.rangeGastosRecurrentes = 'ControlGastosRecurrentes!A2:G';
+GastosComponentComponent.rangeGastosRecurrentesAddRow = 'ControlGastosRecurrentes!A';
+GastosComponentComponent.rangeGastosOcasionales = 'ControlGastosOcasionales!A2:D';
+GastosComponentComponent.rangeGastosOcasionalesAddRow = 'ControlGastosOcasionales!A';
+GastosComponentComponent.ctorParameters = () => [
+    { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
+];
+GastosComponentComponent = GastosComponentComponent_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-gastos-component',
+        template: __webpack_require__(/*! raw-loader!./gastos-component.component.html */ "./node_modules/raw-loader/index.js!./src/app/gastos-component/gastos-component.component.html"),
+        styles: [__webpack_require__(/*! ./gastos-component.component.css */ "./src/app/gastos-component/gastos-component.component.css")]
+    })
+], GastosComponentComponent);
 
 
 
@@ -598,6 +804,61 @@ class DetalleOrden {
 DetalleOrden.ctorParameters = () => [
     { type: _producto_model__WEBPACK_IMPORTED_MODULE_0__["Producto"] },
     { type: _orden_model__WEBPACK_IMPORTED_MODULE_2__["Orden"] }
+];
+
+
+/***/ }),
+
+/***/ "./src/models/gasto.model.ts":
+/*!***********************************!*\
+  !*** ./src/models/gasto.model.ts ***!
+  \***********************************/
+/*! exports provided: Gasto */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Gasto", function() { return Gasto; });
+class Gasto {
+    constructor(id, recurrente, concepto, recurrencia, fechaPagado, montoReferencia, montoPagado) {
+        this.id = id;
+        this.recurrente = recurrente;
+        this.concepto = concepto;
+        this.recurrencia = recurrencia;
+        this.fechaPagado = fechaPagado;
+        this.montoReferencia = montoReferencia;
+        this.montoPagado = montoPagado;
+        console.log(montoPagado);
+    }
+    getRowForGastos() {
+        var row = new Array();
+        row.push(this.id);
+        row.push(this.concepto);
+        if (this.recurrente) {
+            if (!this.recurrencia) {
+                this.recurrencia = "Todos los " + this.fechaPagado.getDate() + " de cada mes";
+                row.push(this.recurrencia);
+            }
+            if (this.recurrente)
+                row.push(this.montoReferencia);
+        }
+        ;
+        row.push(this.fechaPagado);
+        row.push(this.montoPagado);
+        return row;
+    }
+    static createEmptyGasto() {
+        return new Gasto(-1, false, "", null, null, null, null);
+    }
+}
+Gasto.ctorParameters = () => [
+    { type: Number },
+    { type: Boolean },
+    { type: String },
+    { type: String },
+    { type: Date },
+    { type: Number },
+    { type: Number }
 ];
 
 
