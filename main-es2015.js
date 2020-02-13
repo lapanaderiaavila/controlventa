@@ -787,9 +787,10 @@ class DetalleOrden {
     calcularTotal() {
         if (!this.producto.precio || !this.vendido) {
             this.total = 0;
-            return;
         }
-        this.total = this.producto.precio * this.vendido;
+        else {
+            this.total = this.producto.precio * this.vendido;
+        }
         this.orden.calcularTotal();
     }
     minusVendido() {
@@ -799,7 +800,6 @@ class DetalleOrden {
     addVendido() {
         this.vendido = this.add(this.vendido);
         this.calcularTotal();
-        console.log(this.orden);
     }
     minusFeria() {
         this.feria = this.minus(this.feria);

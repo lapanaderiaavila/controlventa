@@ -807,9 +807,10 @@ var DetalleOrden = /** @class */ (function () {
     DetalleOrden.prototype.calcularTotal = function () {
         if (!this.producto.precio || !this.vendido) {
             this.total = 0;
-            return;
         }
-        this.total = this.producto.precio * this.vendido;
+        else {
+            this.total = this.producto.precio * this.vendido;
+        }
         this.orden.calcularTotal();
     };
     DetalleOrden.prototype.minusVendido = function () {
@@ -819,7 +820,6 @@ var DetalleOrden = /** @class */ (function () {
     DetalleOrden.prototype.addVendido = function () {
         this.vendido = this.add(this.vendido);
         this.calcularTotal();
-        console.log(this.orden);
     };
     DetalleOrden.prototype.minusFeria = function () {
         this.feria = this.minus(this.feria);
