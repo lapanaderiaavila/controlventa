@@ -64,6 +64,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
+    { path: '', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
+    { path: 'controlventa', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
     { path: 'panaderiaavila', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
 ];
 let AppRoutingModule = class AppRoutingModule {
