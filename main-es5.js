@@ -30,18 +30,40 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n</div>\n  \n<form class=\"form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n\t<div class=\"form-group row\" *ngIf=\"orden\" class=\"table-responsive-xl\">\n\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col col-md-2\">\n\t\t\t\t<!-- https://material.angular.io/components/autocomplete/overview -->\n\t\t\t\t<label>Producto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Producto\" class=\"form-control\" style=\"width: 250px;\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\" onfocus=\"this.select();\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onProductSelected($event.option.value)\">\n\t\t\t\t\t<!--product is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a product  --->\n\t\t\t\t\t<mat-option *ngFor=\"let detalleOrden of filteredProducts | async\" [value]=\"detalleOrden\">\n\t\t\t\t\t\t{{detalleOrden.producto.nombre}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Precio</label>\n\t\t\t\t<input type=\"number\" placeholder=\"\" class=\"form-control input-number form-control-md text-right\" style=\"width: 50px; padding:0px;\" \n\t\t\t\t\t[(ngModel)]=\"manualDetalleOrden.producto.precio\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualDetalleOrden.producto.id > 0\" onfocus=\"this.select();\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Vendido</label>\n\t\t\t\t<input type=\"number\" placeholder=\"\" class=\"form-control\" style=\"width: 50px;\" [(ngModel)]=\"manualDetalleOrden.vendido\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\" onfocus=\"this.select();\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Total:</label><BR/>\n\t\t\t\t<label>{{ manualDetalleOrden.total | currency:'CRC':true }}</label>\n\t\t\t</div>\n\t\t\t<div class=\"col text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addProductToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr style=\"padding:0px;\">\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\"><h6>Vendido</h6></th>\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody *ngIf=\"orden.detalleOrdenList\">\n\t\t\t\t<tr *ngFor=\"let detalleOrden of orden.detalleOrdenList\">\n\t\t\t\t\t<td style=\"padding:1px;\" (click)=\"detalleOrden.addVendido()\">\n\t\t\t\t\t\t{{ detalleOrden.producto.nombre }}\n\t\t\t\t\t\t<small>({{ detalleOrden.producto.precio | currency:'CRC':true }})</small>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding:1px;\">\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<!--span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-success btn-number btn-sm\" data-type=\"plus\" (click)=\"detalleOrden.addVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-plus\" style=\"padding-left: 1rem; padding-right: 1rem;\">+</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span-->\n\t\t\t\t\t\t\t<input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 50px;\" [(ngModel)]=\"detalleOrden.vendido\" [ngModelOptions]=\"{standalone: true}\"\n\t\t\t\t\t\t\t\t\t(ngModelChange)=\"detalleOrden.onChangeVendido($event)\" onclick=\"this.select();\" [disabled]=\"guardando\"/>\n\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-danger btn-number btn-sm\" data-type=\"minus\" (click)=\"detalleOrden.minusVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-minus\" style=\"padding-left: 1rem; padding-right: 1rem;\">-</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding:1px; width: 150px; max-width: 150px;\" (click)=\"detalleOrden.addVendido()\">\n\t\t\t\t\t\t<h6 class=\"text-right\">{{ detalleOrden.total | currency:'CRC':true }}</h6>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td colspan=\"2\" class=\"text-right\">\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" style=\"margin-right: 20px;\"\n\t\t\t\t\t\t\t(click)=\"registrarVenta()\">\n\t\t\t\t\t\t\tGuardar\n\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnTipoPago\" (click)=\"orden.toggleTipoPago()\">\n\t\t\t\t\t\t\t{{orden.tipoPago}}\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t\t<h5>{{orden.total | currency:'CRC':true }}</h5>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\n</form>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n</div>\n\n<form class=\"form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n\t<div class=\"form-group row\" *ngIf=\"orden\" class=\"table-responsive-xl\">\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col col-md-2\">\n\t\t\t\t<!-- https://material.angular.io/components/autocomplete/overview -->\n\t\t\t\t<label>Producto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Producto\" class=\"form-control\" style=\"width: 250px;\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\" onfocus=\"this.select();\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onProductSelected($event.option.value)\">\n\t\t\t\t\t<!--product is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a product  --->\n\t\t\t\t\t<mat-option *ngFor=\"let detalleOrden of filteredProducts | async\" [value]=\"detalleOrden\">\n\t\t\t\t\t\t{{detalleOrden.producto.nombre}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Precio</label>\n\t\t\t\t<input type=\"number\" placeholder=\"\" class=\"form-control input-number form-control-md text-right\" style=\"width: 50px; padding:0px;\" \n\t\t\t\t\t[(ngModel)]=\"manualDetalleOrden.producto.precio\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualDetalleOrden.producto.id > 0\" onfocus=\"this.select();\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Vendido</label>\n\t\t\t\t<input type=\"number\" placeholder=\"\" class=\"form-control\" style=\"width: 50px;\" [(ngModel)]=\"manualDetalleOrden.vendido\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\" onfocus=\"this.select();\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Total:</label><BR/>\n\t\t\t\t<label>{{ manualDetalleOrden.total | currency:'CRC':true }}</label>\n\t\t\t</div>\n\t\t\t<div class=\"col text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addProductToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr style=\"padding:0px;\">\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\"><h6>Vendido</h6></th>\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody *ngIf=\"orden.detalleOrdenList\">\n\t\t\t\t<tr *ngFor=\"let detalleOrden of orden.detalleOrdenList\">\n\t\t\t\t\t<td style=\"padding:1px;\" (click)=\"detalleOrden.addVendido()\">\n\t\t\t\t\t\t{{ detalleOrden.producto.nombre }}\n\t\t\t\t\t\t<small>({{ detalleOrden.producto.precio | currency:'CRC':true }})</small>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding:1px;\">\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<!--span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-success btn-number btn-sm\" data-type=\"plus\" (click)=\"detalleOrden.addVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-plus\" style=\"padding-left: 1rem; padding-right: 1rem;\">+</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span-->\n\t\t\t\t\t\t\t<input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 50px;\" [(ngModel)]=\"detalleOrden.vendido\" [ngModelOptions]=\"{standalone: true}\"\n\t\t\t\t\t\t\t\t\t(ngModelChange)=\"detalleOrden.onChangeVendido($event)\" onclick=\"this.select();\" [disabled]=\"guardando\"/>\n\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-danger btn-number btn-sm\" data-type=\"minus\" (click)=\"detalleOrden.minusVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-minus\" style=\"padding-left: 1rem; padding-right: 1rem;\">-</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding:1px; width: 150px; max-width: 150px;\" (click)=\"detalleOrden.addVendido()\">\n\t\t\t\t\t\t<h6 class=\"text-right\">{{ detalleOrden.total | currency:'CRC':true }}</h6>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td colspan=\"2\" class=\"text-right\">\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" style=\"margin-right: 20px;\"\n\t\t\t\t\t\t\t(click)=\"registrarVenta()\">\n\t\t\t\t\t\t\tGuardar\n\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnTipoPago\" (click)=\"orden.toggleTipoPago()\">\n\t\t\t\t\t\t\t{{orden.tipoPago}}\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t\t<h5>{{orden.total | currency:'CRC':true }}</h5>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\n</form>\n"
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/gastos-component/gastos-component.component.html":
-/*!********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/gastos-component/gastos-component.component.html ***!
-  \********************************************************************************************/
+/***/ "./node_modules/raw-loader/index.js!./src/app/gastos-component/gastos.component.html":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/gastos-component/gastos.component.html ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\t<div class=\"form-group row\" class=\"table-responsive-lg\">\n\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<BR/>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Concepto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Concepto\" class=\"form-control\" style=\"width: 150px;\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onConceptoSelected($event.option.value)\">\n\t\t\t\t\t<!--concepto is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a concepto  --->\n\t\t\t\t\t<mat-option *ngFor=\"let gasto of filteredGastos | async\" [value]=\"gasto\">\n\t\t\t\t\t\t{{gasto.concepto}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label style=\"width: 100%; text-align: center;\">Recurrente</label>\n\t\t\t\t<input type=\"checkbox\" class=\"form-control\" [(ngModel)]=\"manualGasto.recurrente\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualGasto.id > 0\"/>\n\t\t\t</div>\n            <div class=\"col\">\n\t\t\t\t<label>Monto</label>\n\t\t\t\t<input type=\"number\" placeholder=\"Monto\" class=\"form-control\" [(ngModel)]=\"manualGasto.montoPagado\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addGastoToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr>\n                    <th scope=\"col\"><h6>Concepto</h6></th>\n                    <th scope=\"col\"><h6>Recurrencia</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Referencia</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Fecha</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Pagado</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let gasto of allGastos\">\n\t\t\t\t\t<td scope=\"row\" class=\"text-nowrap\" style=\"text-align: left;\">\n\t\t\t\t\t\t<h6>\n\t\t\t\t\t\t\t{{ gasto.concepto }}\n\t\t\t\t\t\t</h6>\n\t\t\t\t\t</td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: left;\">\n\t\t\t\t\t\t\t{{ gasto.recurrencia }}\n\t\t\t\t\t\t</h6>\n                    </td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n\t\t\t\t\t\t\t{{ gasto.montoReferencia | currency:'CRC':true}}\n\t\t\t\t\t\t</h6>\n                    </td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n                            {{ gasto.fechaPagado | date }} \n                        </h6>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n                            {{ gasto.montoPagado  | currency:'CRC':true}} \n                        </h6>\n\t\t\t\t\t</td>\n                </tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n"
+module.exports = "\n\t<div class=\"form-group row\" class=\"table-responsive-lg\">\n\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<BR/>\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Concepto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Concepto\" class=\"form-control\" style=\"width: 150px;\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onConceptoSelected($event.option.value)\">\n\t\t\t\t\t<!--concepto is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a concepto  --->\n\t\t\t\t\t<mat-option *ngFor=\"let gasto of filteredGastos | async\" [value]=\"gasto\">\n\t\t\t\t\t\t{{gasto.concepto}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label style=\"width: 100%; text-align: center;\">Recurrente</label>\n\t\t\t\t<input type=\"checkbox\" class=\"form-control\" [(ngModel)]=\"manualExpense.recurrente\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualExpense.id > 0\"/>\n\t\t\t</div>\n            <div class=\"col\">\n\t\t\t\t<label>Monto</label>\n\t\t\t\t<input type=\"number\" placeholder=\"Monto\" class=\"form-control\" [(ngModel)]=\"manualExpense.montoPagado\" \n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addGastoToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr>\n                    <th scope=\"col\"><h6>Concepto</h6></th>\n                    <th scope=\"col\"><h6>Recurrencia</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Referencia</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Fecha</h6></th>\n                    <th scope=\"col\"><h6 style=\"text-align: right;\">Pagado</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let gasto of allExpenses\">\n\t\t\t\t\t<td scope=\"row\" class=\"text-nowrap\" style=\"text-align: left;\">\n\t\t\t\t\t\t<h6>\n\t\t\t\t\t\t\t{{ gasto.concepto }}\n\t\t\t\t\t\t</h6>\n\t\t\t\t\t</td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: left;\">\n\t\t\t\t\t\t\t{{ gasto.recurrencia }}\n\t\t\t\t\t\t</h6>\n                    </td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n\t\t\t\t\t\t\t{{ gasto.montoReferencia | currency:'CRC':true}}\n\t\t\t\t\t\t</h6>\n                    </td>\n                    <td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n                            {{ gasto.fechaPagado | date }} \n                        </h6>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t<h6 style=\"text-align: right;\">\n                            {{ gasto.montoPagado  | currency:'CRC':true}} \n                        </h6>\n\t\t\t\t\t</td>\n                </tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/produccion-component/produccion.component.html":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/produccion-component/produccion.component.html ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n   <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n </div>\n \n <form class=\"form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n   <table class=\"table table-hover table-striped \">\n      <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n      <thead>\n         <tr style=\"padding:0px;\">\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producido</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n         </tr>\n      </thead>\n\n      <tbody *ngIf=\"allProduction\">\n         <tr *ngFor=\"let productionProduct of allProduction\">\n            <td>\n               {{ productionProduct.product.nombre }}\n            </td>\n            <td>\n               <div class=\"input-group\">\n                  <input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 60px;\" [(ngModel)]=\"productionProduct.production\" [ngModelOptions]=\"{standalone: true}\" [disabled]=\"guardando\"/>\n               </div>\n            </td>\n            <td>\n               <h6 class=\"text-right\">{{ productionProduct.productionTotal }}</h6>\n            </td>\n         </tr>\n         <tr>\n            <td class=\"text-right\" colspan=\"2\">\n               <button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" (click)=\"saveProduction()\">\n                  Guardar\n               </button>\n            </td>\n            <td></td>\n         </tr>\n      </tbody>\n   </table>\n  </form>\n "
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/wasted-component/wasted.component.html":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/wasted-component/wasted.component.html ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n   <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n </div>\n \n <form class=\"form-group\" style=\"margin: 0px; padding: 0px;\">\n   <table class=\"table table-hover table-striped \">\n      <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n      <thead>\n         <tr style=\"padding:0px;\">\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Perdido</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n         </tr>\n      </thead>\n\n      <tbody *ngIf=\"allWasted\">\n         <tr *ngFor=\"let wastedProduct of allWasted\">\n            <td>\n               {{ wastedProduct.product.nombre }}\n            </td>\n            <td>\n               <div class=\"input-group\">\n                  <input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 60px;\" [(ngModel)]=\"wastedProduct.wasted\" [ngModelOptions]=\"{standalone: true}\" [disabled]=\"guardando\"/>\n               </div>\n            </td>\n            <td>\n               <h6 class=\"text-right\">{{ wastedProduct.wastedTotal }}</h6>\n            </td>\n         </tr>\n         <tr>\n            <td class=\"text-right\" colspan=\"2\">\n               <button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" (click)=\"saveWasted()\">\n                  Guardar\n               </button>\n            </td>\n            <td></td>\n         </tr>\n      </tbody>\n   </table>\n  </form>\n "
 
 /***/ }),
 
@@ -66,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     { path: '', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
     { path: 'controlventa', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
-    { path: 'panaderiaavila', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
+    { path: 'panaderiaavila', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -108,13 +130,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
-/* harmony import */ var _models_producto_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/producto.model */ "./src/models/producto.model.ts");
-/* harmony import */ var _models_orden_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/orden.model */ "./src/models/orden.model.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_models_detalle_orden_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/models/detalle.orden.model */ "./src/models/detalle.orden.model.ts");
-
+/* harmony import */ var _services_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/product.service */ "./src/services/product.service.ts");
+/* harmony import */ var _models_order_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/order.model */ "./src/models/order.model.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/models/order-line.model */ "./src/models/order-line.model.ts");
 
 
 
@@ -125,63 +145,44 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(gapiSession, ngZone) {
+    function AppComponent(productService, gapiSession, ngZone) {
+        this.productService = productService;
         this.gapiSession = gapiSession;
         this.ngZone = ngZone;
         this.productsForDropDown = [];
         this.allProductos = [];
         this.productosForTable = [];
+        this.orden = null;
+        this.manualDetalleOrden = null;
         this.test = "test";
         this.guardando = false;
-        this.control = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](); //used for the autocomplete text
+        this.control = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](); //used for the autocomplete text
+        this.filteredProducts = null;
     }
     AppComponent_1 = AppComponent;
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (!this.gapiSession.isSignedIn) {
-            // use this to refresh the credentials
-            //this.gapiSession.signOut();
-            this.gapiSession.signIn();
-        }
-        this._loadProducts().subscribe(function (productosRange) {
-            // necessary to run insice the zone in order to fire the change detection
+        this.productService.initProductService().then(function () {
             _this.ngZone.run(function () {
-                var listaProductos = productosRange.result["values"];
-                if (listaProductos) {
-                    for (var i = 0; i < listaProductos.length; i++) {
-                        var productoFromSheet = listaProductos[i];
-                        if (productoFromSheet[3] && productoFromSheet[3] != "") { // productos with order 0 are considered deleted
-                            // 0=Id, 1 = Name, 2 = Price, 3 = Order
-                            var product = new _models_producto_model__WEBPACK_IMPORTED_MODULE_3__["Producto"](productoFromSheet[0], productoFromSheet[1], productoFromSheet[2], productoFromSheet[3]);
-                            // name, description, price
-                            _this.allProductos.push(product);
-                            if (product.order > 0) {
-                                _this.productosForTable.push(product);
-                            }
-                            // name, description, price
-                            _this.productsForDropDown.push(new src_models_detalle_orden_model__WEBPACK_IMPORTED_MODULE_8__["DetalleOrden"](product, _this.orden));
-                        }
+                _this.productService.allProducts.forEach(function (p) {
+                    if (p.order > 0) {
+                        _this.productosForTable.push(p);
                     }
-                }
+                    // name, description, price
+                    _this.productsForDropDown.push(new src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"](p, _this.orden));
+                });
                 _this.productosForTable = _this.productosForTable.sort(function (p1, p2) { return p1.order - p2.order; });
-                _this.orden = new _models_orden_model__WEBPACK_IMPORTED_MODULE_4__["Orden"](_this.productosForTable);
-                _this.manualDetalleOrden = src_models_detalle_orden_model__WEBPACK_IMPORTED_MODULE_8__["DetalleOrden"].createEmptyDetalleOrden(_this.orden);
+                _this.orden = new _models_order_model__WEBPACK_IMPORTED_MODULE_4__["Order"](_this.productosForTable);
+                _this.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(_this.orden);
                 // move the ones that are not shown in the table to the beginning
                 _this.productsForDropDown = _this.productsForDropDown.sort(function (p1, p2) { return (p1.producto.order - p2.producto.order); });
                 for (var detalleOrden in _this.productsForDropDown) {
                     _this.productsForDropDown[detalleOrden].orden = _this.orden;
                 }
+                // the value in control is an string while the user is typing, once the users selects a product from the list, it will be a DetalleOrden
+                _this.filteredProducts = _this.control.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (display) { return _this._filter(display instanceof src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"] ? display.producto.nombre : display); }));
             });
         });
-        // the value in control is an string while the user is typing, once the users selects a product from the list, it will be a DetalleOrden
-        this.filteredProducts = this.control.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (display) { return _this._filter(display instanceof src_models_detalle_orden_model__WEBPACK_IMPORTED_MODULE_8__["DetalleOrden"] ? display.producto.nombre : display); }));
-    };
-    AppComponent.prototype._loadProducts = function () {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(gapi.client.request({
-            method: 'GET',
-            // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-            path: "https://sheets.googleapis.com/v4/spreadsheets/" + AppComponent_1.spreadsheetId + "/values/" + AppComponent_1.rangeCatalogosProductos + "?valueRenderOption=" + AppComponent_1.valueRenderOption
-        }));
     };
     AppComponent.prototype.registrarVenta = function () {
         this.guardando = true;
@@ -231,27 +232,6 @@ var AppComponent = /** @class */ (function () {
                 });
             });
         });
-        // GET sheet/tab ID
-        /*gapi.client.request(
-            {
-                method: 'GET',
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}`
-            }
-        ).then(function(response)
-            {
-                console.log(response);
-            }
-        );*/
-        /*gapi.client.request(
-            {
-                method: 'GET',
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${spreadsheetRange}`
-            }
-        ).then(function(response)
-            {
-                console.log(response);
-            }
-        );*/
     };
     AppComponent.prototype._filter = function (value) {
         var _this = this;
@@ -269,7 +249,7 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype._resetManualDetalle = function () {
         if (this.manualDetalleOrden.producto.id > 0) {
-            this.manualDetalleOrden = src_models_detalle_orden_model__WEBPACK_IMPORTED_MODULE_8__["DetalleOrden"].createEmptyDetalleOrden(this.orden);
+            this.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(this.orden);
         }
     };
     AppComponent.prototype.displayFn = function (detalle) {
@@ -298,7 +278,7 @@ var AppComponent = /** @class */ (function () {
                 this.orden.detalleOrdenList.unshift(this.manualDetalleOrden);
             }
             // clean the new product information to enter a new one
-            this.manualDetalleOrden = src_models_detalle_orden_model__WEBPACK_IMPORTED_MODULE_8__["DetalleOrden"].createEmptyDetalleOrden(this.orden);
+            this.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(this.orden);
             this.control.setValue("");
             this.orden.calcularTotal();
         }
@@ -338,7 +318,7 @@ var AppComponent = /** @class */ (function () {
                     self_1.orden.detalleOrdenList.unshift(self_1.manualDetalleOrden);
                     self_1.orden.calcularTotal();
                     // clean the new product information to enter a new one
-                    self_1.manualDetalleOrden = src_models_detalle_orden_model__WEBPACK_IMPORTED_MODULE_8__["DetalleOrden"].createEmptyDetalleOrden(self_1.orden);
+                    self_1.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(self_1.orden);
                     self_1.control.setValue("");
                 });
             });
@@ -357,6 +337,7 @@ var AppComponent = /** @class */ (function () {
     //private static controlVentaSheetId = 1798969314; // id de las versiones viejas, viene en el URL "#gid=0"
     AppComponent.controlVentaSheetId = 0; // id de las versiones nuevas, viene en el URL "#gid=0"
     AppComponent.ctorParameters = function () { return [
+        { type: _services_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"] },
         { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
     ]; };
@@ -378,26 +359,28 @@ var AppComponent = /** @class */ (function () {
 /*!*******************************!*\
   !*** ./src/app/app.module.ts ***!
   \*******************************/
-/*! exports provided: initGapi, AppModule */
+/*! exports provided: initApp, AppModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initGapi", function() { return initGapi; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initApp", function() { return initApp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/autocomplete */ "./node_modules/@angular/material/esm5/autocomplete.es5.js");
-/* harmony import */ var _gastos_component_gastos_component_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./gastos-component/gastos-component.component */ "./src/app/gastos-component/gastos-component.component.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/locales/es-CR */ "./node_modules/@angular/common/locales/es-CR.js");
-/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/autocomplete */ "./node_modules/@angular/material/esm5/autocomplete.es5.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/locales/es-CR */ "./node_modules/@angular/common/locales/es-CR.js");
+/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./gastos-component/gastos.component */ "./src/app/gastos-component/gastos.component.ts");
+/* harmony import */ var _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./produccion-component/produccion.component */ "./src/app/produccion-component/produccion.component.ts");
+/* harmony import */ var _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./wasted-component/wasted.component */ "./src/app/wasted-component/wasted.component.ts");
 
 
 
@@ -406,38 +389,69 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // root
 
 
 
 
 
-Object(_angular_common__WEBPACK_IMPORTED_MODULE_10__["registerLocaleData"])(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_11___default.a);
-function initGapi(gapiSession) {
-    return function () { return gapiSession.initClient(); };
+
+Object(_angular_common__WEBPACK_IMPORTED_MODULE_9__["registerLocaleData"])(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10___default.a);
+function initApp(gapiSession) {
+    return function () {
+        gapiSession.initClient("module");
+    };
 }
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+            // import components and directives to use
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _gastos_component_gastos_component_component__WEBPACK_IMPORTED_MODULE_9__["GastosComponentComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
+                _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_11__["GastosComponent"],
+                _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_12__["ProduccionComponent"],
+                _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_13__["WastedComponent"]
             ],
+            // import other modules to use
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__["BrowserAnimationsModule"],
-                _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_8__["MatAutocompleteModule"]
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"],
+                _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_7__["MatAutocompleteModule"]
             ],
+            /*
+            https://angular.io/guide/providers:
+              A provider is an instruction to the Dependency Injection system on how to obtain a value for a dependency
+              Most of the time, these dependencies are services that you create and provide.
+            https://angular.io/guide/dependency-injection-providers#tree-shakable-providers
+              APP_INITIALIZER: Callback is invoked before an app is initialized. All registered initializers can optionally return a Promise
+              All initializer functions that return Promises must be resolved before the application is bootstrapped.
+              If one of the initializers fails to resolves, the application is not bootstrapped.
+              multi: true:  Adds the provider to the existing collection.
+            */
             providers: [
-                { provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["APP_INITIALIZER"], useFactory: initGapi, deps: [_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_6__["GapiSession"]], multi: true },
-                _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_6__["GapiSession"],
-                { provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["LOCALE_ID"], useValue: 'es-CR' }
+                {
+                    /* Instantiates a GapiSession object and call its initGapi method once the app has been initialized */
+                    provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["APP_INITIALIZER"],
+                    useFactory: initApp,
+                    deps: [_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_5__["GapiSession"]],
+                    multi: true
+                },
+                _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_5__["GapiSession"],
+                {
+                    provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["LOCALE_ID"],
+                    useValue: 'es-CR'
+                }
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"], _gastos_component_gastos_component_component__WEBPACK_IMPORTED_MODULE_9__["GastosComponentComponent"]]
+            /*
+            https://angular.io/guide/bootstrapping
+              The root component(s) that Angular creates and inserts into the index.html host web page.
+            */
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"], _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_11__["GastosComponent"], _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_12__["ProduccionComponent"], _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_13__["WastedComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -447,35 +461,33 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/gastos-component/gastos-component.component.css":
-/*!*****************************************************************!*\
-  !*** ./src/app/gastos-component/gastos-component.component.css ***!
-  \*****************************************************************/
+/***/ "./src/app/gastos-component/gastos.component.css":
+/*!*******************************************************!*\
+  !*** ./src/app/gastos-component/gastos.component.css ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dhc3Rvcy1jb21wb25lbnQvZ2FzdG9zLWNvbXBvbmVudC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dhc3Rvcy1jb21wb25lbnQvZ2FzdG9zLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
-/***/ "./src/app/gastos-component/gastos-component.component.ts":
-/*!****************************************************************!*\
-  !*** ./src/app/gastos-component/gastos-component.component.ts ***!
-  \****************************************************************/
-/*! exports provided: GastosComponentComponent */
+/***/ "./src/app/gastos-component/gastos.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/gastos-component/gastos.component.ts ***!
+  \******************************************************/
+/*! exports provided: GastosComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GastosComponentComponent", function() { return GastosComponentComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GastosComponent", function() { return GastosComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/gasto.model */ "./src/models/gasto.model.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _models_expense_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/expense.model */ "./src/models/expense.model.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_services_expense_service_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/services/expense-service.service */ "./src/services/expense-service.service.ts");
 
 
 
@@ -483,157 +495,270 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-var GastosComponentComponent = /** @class */ (function () {
-    function GastosComponentComponent(gapiSession, ngZone) {
-        this.gapiSession = gapiSession;
+var GastosComponent = /** @class */ (function () {
+    function GastosComponent(expenseService, ngZone) {
+        this.expenseService = expenseService;
         this.ngZone = ngZone;
-        this.allGastos = [];
-        this.gastosRecurrentes = [];
-        this.gastosOcasionales = [];
-        this.manualGasto = _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"].createEmptyGasto();
-        this.control = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](); //used for the autocomplete text
+        this._allExpenses = [];
+        this._recurrenteExpenses = [];
+        this._ocasionalExpenses = [];
+        this._manualExpense = _models_expense_model__WEBPACK_IMPORTED_MODULE_2__["Expense"].createEmptyGasto();
+        this.control = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](); //used for the autocomplete text
     }
-    GastosComponentComponent_1 = GastosComponentComponent;
-    GastosComponentComponent.prototype.ngOnInit = function () {
+    Object.defineProperty(GastosComponent.prototype, "allExpenses", {
+        get: function () {
+            return this._allExpenses;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(GastosComponent.prototype, "manualExpense", {
+        /*
+           public get recurrenteExpenses(): Array<Expense>{
+              return this._recurrenteExpenses
+           };
+        
+           public get ocasionalExpenses(): Array<Expense> {
+              return this._ocasionalExpenses;
+           };*/
+        get: function () {
+            return this._manualExpense;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    GastosComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (!this.gapiSession.isSignedIn) {
-            // use this to refresh the credentials
-            //this.gapiSession.signOut();
-            this.gapiSession.signIn();
-        }
-        this._loadGastosRecurrentes().subscribe(function (gastosRange) {
-            // necessary to run insice the zone in order to fire the change detection
+        this.expenseService.initExpenseService().then(function () {
             _this.ngZone.run(function () {
-                var listaGastos = gastosRange.result["values"];
-                if (listaGastos) {
-                    for (var i = 0; i < listaGastos.length; i++) {
-                        var gastoFromSheet = listaGastos[i];
-                        var gasto = new _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"](gastoFromSheet[0], true, gastoFromSheet[1], gastoFromSheet[2], gastoFromSheet[4], gastoFromSheet[3], gastoFromSheet[5]);
-                        _this.gastosRecurrentes.push(gasto);
-                        _this.allGastos.push(gasto);
-                    }
-                }
+                _this._allExpenses = _this.expenseService.allExpenses;
+                _this._recurrenteExpenses = _this.expenseService.recurrenteExpenses;
+                _this._ocasionalExpenses = _this.expenseService.ocasionalExpenses;
+                // the valueis an string while the user is typing, once the users selects a product from the list, it will be a DetalleOrden
+                _this.filteredGastos = _this.control.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (display) { return display ? _this._filter(display instanceof _models_expense_model__WEBPACK_IMPORTED_MODULE_2__["Expense"] ? display.concepto : display) : _this._allExpenses.slice(); }));
             });
         });
-        this._loadGastosOcasionales().subscribe(function (gastosRange) {
-            // necessary to run insice the zone in order to fire the change detection
-            _this.ngZone.run(function () {
-                var listaGastos = gastosRange.result["values"];
-                if (listaGastos) {
-                    for (var i = 0; i < listaGastos.length; i++) {
-                        var gastoFromSheet = listaGastos[i];
-                        // 0 = id, 1 = Concepto, 2 = Fecha Pagado, 3 = Monto Pagado
-                        var gasto = new _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"](gastoFromSheet[0], false, gastoFromSheet[1], null, gastoFromSheet[2], null, gastoFromSheet[3]);
-                        _this.gastosOcasionales.push(gasto);
-                        _this.allGastos.push(gasto);
-                    }
-                }
-            });
-        });
-        // the value in control is an string while the user is typing, once the users selects a product from the list, it will be a DetalleOrden
-        this.filteredGastos = this.control.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (display) { return display ? _this._filter(display instanceof _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"] ? display.concepto : display) : _this.allGastos.slice(); }));
     };
-    GastosComponentComponent.prototype._loadGastosRecurrentes = function () {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(gapi.client.request({
-            method: 'GET',
-            // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-            path: "https://sheets.googleapis.com/v4/spreadsheets/" + _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].spreadsheetId + "/values/" + GastosComponentComponent_1.rangeGastosRecurrentes + "?valueRenderOption=" + _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].valueRenderOption + "&dateTimeRenderOption=" + _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].dateTimeRenderOption
-        }));
-    };
-    GastosComponentComponent.prototype._loadGastosOcasionales = function () {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(gapi.client.request({
-            method: 'GET',
-            // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-            path: "https://sheets.googleapis.com/v4/spreadsheets/" + _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].spreadsheetId + "/values/" + GastosComponentComponent_1.rangeGastosOcasionales + "?valueRenderOption=" + _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].valueRenderOption + "&dateTimeRenderOption=" + _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].dateTimeRenderOption
-        }));
-    };
-    GastosComponentComponent.prototype._filter = function (value) {
+    GastosComponent.prototype._filter = function (value) {
         var _this = this;
         if (value) {
             var filterValue_1 = this._normalizeValue(value);
-            var gastosMatched = this.allGastos
+            var gastosMatched = this._allExpenses
                 .filter(function (g) { return _this._normalizeValue(g.concepto).includes(filterValue_1); });
             return gastosMatched;
         }
         return [];
     };
-    GastosComponentComponent.prototype._normalizeValue = function (value) {
+    GastosComponent.prototype._normalizeValue = function (value) {
         return value ? value.toLowerCase().replace(/\s/g, '') : "";
     };
-    GastosComponentComponent.prototype.displayFn = function (gasto) {
+    GastosComponent.prototype.displayFn = function (gasto) {
         return gasto ? gasto.concepto : undefined;
     };
-    GastosComponentComponent.prototype.onConceptoSelected = function (gastoSelected) {
-        this.manualGasto = gastoSelected;
+    GastosComponent.prototype.onConceptoSelected = function (gastoSelected) {
+        this._manualExpense = gastoSelected;
     };
-    GastosComponentComponent.prototype.addGastoToTable = function () {
+    GastosComponent.prototype.addGastoToTable = function () {
+        var _this = this;
         // first lets validate the data
         if (!this.control.value ||
-            this.manualGasto.montoPagado <= 0) {
+            this._manualExpense.montoPagado <= 0) {
             return;
         }
-        this.manualGasto.fechaPagado = new Date();
-        if (this.manualGasto.id <= 0) {
-            // if it gets here, means the gasto has not been registered so we need to add it into the ControlGastosRecurrentes or ControlGastosOcasionales catalog (+1 because of the header)
-            this.manualGasto.concepto = this.control.value;
-            this.manualGasto.id = this.manualGasto.recurrente ? this.gastosRecurrentes.length + 1 : this.gastosOcasionales.length + 1;
+        this._manualExpense.fechaPagado = new Date();
+        if (this._manualExpense.id <= 0) {
+            // if it gets here, means the expense has not been registered so we need to add it into the ControlGastosRecurrentes or ControlGastosOcasionales catalog (+1 because of the header)
+            this._manualExpense.concepto = this.control.value;
+            this._manualExpense.id = this._manualExpense.recurrente ? this._recurrenteExpenses.length + 1 : this._ocasionalExpenses.length + 1;
         }
-        // determine the row where to insert or update the info
-        var rowIndexToUpdate = GastosComponentComponent_1.rangeGastosOcasionalesAddRow + (this.manualGasto.id > 0 ? (1 + this.manualGasto.id) : (2 + this.gastosOcasionales.length));
-        if (this.manualGasto.recurrente) {
-            rowIndexToUpdate = GastosComponentComponent_1.rangeGastosRecurrentesAddRow + (this.manualGasto.id > 0 ? (1 + this.manualGasto.id) : (2 + this.gastosRecurrentes.length));
-            this.manualGasto.montoReferencia = this.manualGasto.montoPagado;
-        }
-        var self = this;
-        gapi.client.request({
-            method: 'POST',
-            // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
-            path: "https://sheets.googleapis.com/v4/spreadsheets/" + _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].spreadsheetId + "/values:batchUpdate",
-            body: {
-                valueInputOption: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"].valueInputOption,
-                data: [
-                    {
-                        range: rowIndexToUpdate,
-                        values: [
-                            self.manualGasto.getRowForGastos()
-                        ]
-                    }
-                ]
-            }
-        }).then(function (response) {
-            self.ngZone.run(function () {
-                self.allGastos.push(self.manualGasto);
-                if (self.manualGasto.recurrente) {
-                    self.gastosRecurrentes.push(self.manualGasto);
-                }
-                else {
-                    self.gastosOcasionales.push(self.manualGasto);
-                }
+        this.expenseService.saveExpense(this._manualExpense).then(function () {
+            return _this.ngZone.run(function () {
+                _this._allExpenses = _this.expenseService.allExpenses;
+                _this._recurrenteExpenses = _this.expenseService.recurrenteExpenses;
+                _this._ocasionalExpenses = _this.expenseService.ocasionalExpenses;
                 // clean the new product information to enter a new one
-                self.manualGasto = _models_gasto_model__WEBPACK_IMPORTED_MODULE_4__["Gasto"].createEmptyGasto();
-                self.control.setValue("");
+                _this._manualExpense = _models_expense_model__WEBPACK_IMPORTED_MODULE_2__["Expense"].createEmptyGasto();
+                _this.control.setValue("");
             });
         });
     };
-    var GastosComponentComponent_1;
-    GastosComponentComponent.rangeGastosRecurrentes = 'ControlGastosRecurrentes!A2:G';
-    GastosComponentComponent.rangeGastosRecurrentesAddRow = 'ControlGastosRecurrentes!A';
-    GastosComponentComponent.rangeGastosOcasionales = 'ControlGastosOcasionales!A2:D';
-    GastosComponentComponent.rangeGastosOcasionalesAddRow = 'ControlGastosOcasionales!A';
-    GastosComponentComponent.ctorParameters = function () { return [
-        { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
+    GastosComponent.ctorParameters = function () { return [
+        { type: src_services_expense_service_service__WEBPACK_IMPORTED_MODULE_5__["ExpenseService"] },
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
     ]; };
-    GastosComponentComponent = GastosComponentComponent_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    GastosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-gastos-component',
-            template: __webpack_require__(/*! raw-loader!./gastos-component.component.html */ "./node_modules/raw-loader/index.js!./src/app/gastos-component/gastos-component.component.html"),
-            styles: [__webpack_require__(/*! ./gastos-component.component.css */ "./src/app/gastos-component/gastos-component.component.css")]
+            template: __webpack_require__(/*! raw-loader!./gastos.component.html */ "./node_modules/raw-loader/index.js!./src/app/gastos-component/gastos.component.html"),
+            styles: [__webpack_require__(/*! ./gastos.component.css */ "./src/app/gastos-component/gastos.component.css")]
         })
-    ], GastosComponentComponent);
-    return GastosComponentComponent;
+    ], GastosComponent);
+    return GastosComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/produccion-component/produccion.component.css":
+/*!***************************************************************!*\
+  !*** ./src/app/produccion-component/produccion.component.css ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2R1Y2Npb24tY29tcG9uZW50L3Byb2R1Y2Npb24uY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/produccion-component/produccion.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/produccion-component/produccion.component.ts ***!
+  \**************************************************************/
+/*! exports provided: ProduccionComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProduccionComponent", function() { return ProduccionComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_services_production_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/production.service */ "./src/services/production.service.ts");
+
+
+
+var ProduccionComponent = /** @class */ (function () {
+    function ProduccionComponent(productionService, ngZone) {
+        this.productionService = productionService;
+        this.ngZone = ngZone;
+        this._processing = false;
+        this._allProduction = [];
+    }
+    Object.defineProperty(ProduccionComponent.prototype, "allProduction", {
+        get: function () {
+            return this._allProduction;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProduccionComponent.prototype, "processing", {
+        get: function () {
+            return this._processing;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProduccionComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.productionService.initProductionServiceService().then(function () {
+            _this.ngZone.run(function () {
+                _this._allProduction = _this.productionService.allProduction;
+            });
+        });
+    };
+    ProduccionComponent.prototype.saveProduction = function () {
+        var _this = this;
+        this.productionService.saveProduction().then(function () {
+            _this.ngZone.run(function () {
+                _this._allProduction = _this.productionService.allProduction;
+            });
+        });
+    };
+    ProduccionComponent.ctorParameters = function () { return [
+        { type: src_services_production_service__WEBPACK_IMPORTED_MODULE_2__["ProductionService"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
+    ]; };
+    ProduccionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-produccion-component',
+            template: __webpack_require__(/*! raw-loader!./produccion.component.html */ "./node_modules/raw-loader/index.js!./src/app/produccion-component/produccion.component.html"),
+            styles: [__webpack_require__(/*! ./produccion.component.css */ "./src/app/produccion-component/produccion.component.css")]
+        })
+    ], ProduccionComponent);
+    return ProduccionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/wasted-component/wasted.component.css":
+/*!*******************************************************!*\
+  !*** ./src/app/wasted-component/wasted.component.css ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3dhc3RlZC1jb21wb25lbnQvd2FzdGVkLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/wasted-component/wasted.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/wasted-component/wasted.component.ts ***!
+  \******************************************************/
+/*! exports provided: WastedComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WastedComponent", function() { return WastedComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_services_wasted_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/wasted.service */ "./src/services/wasted.service.ts");
+
+
+
+var WastedComponent = /** @class */ (function () {
+    function WastedComponent(wastedService, ngZone) {
+        this.wastedService = wastedService;
+        this.ngZone = ngZone;
+        this._processing = false;
+        this._allWasted = [];
+    }
+    Object.defineProperty(WastedComponent.prototype, "allWasted", {
+        get: function () {
+            return this._allWasted;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WastedComponent.prototype, "processing", {
+        get: function () {
+            return this._processing;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    WastedComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.wastedService.initWastedService().then(function () {
+            _this.ngZone.run(function () {
+                _this._allWasted = _this.wastedService.allWasted;
+            });
+        });
+    };
+    WastedComponent.prototype.saveWasted = function () {
+        var _this = this;
+        this.wastedService.saveWasted().then(function () {
+            _this.ngZone.run(function () {
+                _this._allWasted = _this.wastedService.allWasted;
+            });
+        });
+    };
+    WastedComponent.ctorParameters = function () { return [
+        { type: src_services_wasted_service__WEBPACK_IMPORTED_MODULE_2__["WastedService"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
+    ]; };
+    WastedComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-wasted-component',
+            template: __webpack_require__(/*! raw-loader!./wasted.component.html */ "./node_modules/raw-loader/index.js!./src/app/wasted-component/wasted.component.html"),
+            styles: [__webpack_require__(/*! ./wasted.component.css */ "./src/app/wasted-component/wasted.component.css")]
+        })
+    ], WastedComponent);
+    return WastedComponent;
 }());
 
 
@@ -699,38 +824,69 @@ var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"
 var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 var GapiSession = /** @class */ (function () {
     function GapiSession() {
+        this.googleAuth = null;
     }
-    GapiSession.prototype.initClient = function () {
+    GapiSession.prototype.initClient = function (source) {
         var _this = this;
-        return new Promise(function (resolve, reject) {
-            gapi.load('client:auth2', function () {
-                return gapi.client.init({
-                    apiKey: API_KEY,
-                    clientId: CLIENT_ID,
-                    discoveryDocs: DISCOVERY_DOCS,
-                    scope: SCOPES,
-                }).then(function () {
-                    _this.googleAuth = gapi.auth2.getAuthInstance();
-                    resolve();
+        if (!this.initClientPromise) {
+            console.log("Initializing Google API..." + source);
+            this.initClientPromise = new Promise(function (resolve, reject) {
+                gapi.load('client:auth2', function () {
+                    return gapi.client.init({
+                        apiKey: API_KEY,
+                        clientId: CLIENT_ID,
+                        discoveryDocs: DISCOVERY_DOCS,
+                        scope: SCOPES,
+                    }).then(function () {
+                        _this.initClientSolved = true;
+                        console.log("Google API initialized!");
+                        _this.googleAuth = gapi.auth2.getAuthInstance();
+                        resolve();
+                        if (!_this.isSignedIn) {
+                            // use this to refresh the credentials
+                            //this.gapiSession.signOut();
+                            _this.signIn("init client");
+                        }
+                    }).catch(function (ex) {
+                        _this.initClientSolved = true;
+                        console.log("Unable to initialize Google API! " + ex);
+                    });
                 });
             });
-        });
+        }
+        if (!this.initClientSolved) {
+            // if !this.googleAuth means the 
+            return this.initClientPromise;
+        }
+        else {
+            return Promise.resolve('initialized');
+        }
     };
     Object.defineProperty(GapiSession.prototype, "isSignedIn", {
         get: function () {
+            if (this.googleAuth == null)
+                return false;
             return this.googleAuth.isSignedIn.get();
         },
         enumerable: true,
         configurable: true
     });
-    GapiSession.prototype.signIn = function () {
+    GapiSession.prototype.signIn = function (source) {
+        if (this.googleAuth == null) {
+            console.log("Unable to sign in....initClient() hasn't been called or hasn't finished " + source);
+            return null;
+        }
+        console.log("Sign in with Google API....");
         return this.googleAuth.signIn({
             prompt: 'consent'
         }).then(function (googleUser) {
+            console.log("Signed in!");
             //this.appRepository.User.add(googleUser.getBasicProfile());
         });
     };
     GapiSession.prototype.signOut = function () {
+        if (this.googleAuth == null)
+            return;
         this.googleAuth.signOut();
     };
     GapiSession = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -772,97 +928,18 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 
 /***/ }),
 
-/***/ "./src/models/detalle.orden.model.ts":
-/*!*******************************************!*\
-  !*** ./src/models/detalle.orden.model.ts ***!
-  \*******************************************/
-/*! exports provided: DetalleOrden */
+/***/ "./src/models/expense.model.ts":
+/*!*************************************!*\
+  !*** ./src/models/expense.model.ts ***!
+  \*************************************/
+/*! exports provided: Expense */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetalleOrden", function() { return DetalleOrden; });
-/* harmony import */ var _producto_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./producto.model */ "./src/models/producto.model.ts");
-/* harmony import */ var _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tipo.pago.model */ "./src/models/tipo.pago.model.ts");
-/* harmony import */ var _orden_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./orden.model */ "./src/models/orden.model.ts");
-
-
-
-var DetalleOrden = /** @class */ (function () {
-    function DetalleOrden(producto, orden) {
-        this.vendido = 0;
-        this.feria = 0;
-        this.tipoPago = _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].EFECTIVO;
-        this.total = 0;
-        this.producto = producto;
-        this.orden = orden;
-    }
-    // style guide / naming conventions 
-    // https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html#variable-and-function
-    DetalleOrden.createEmptyDetalleOrden = function (orden) {
-        return new DetalleOrden(_producto_model__WEBPACK_IMPORTED_MODULE_0__["Producto"].createEmptyProduct(), orden);
-    };
-    DetalleOrden.prototype.onChangeVendido = function (vendido) {
-        this.vendido = vendido;
-        this.calcularTotal();
-    };
-    DetalleOrden.prototype.calcularTotal = function () {
-        if (!this.producto.precio || !this.vendido) {
-            this.total = 0;
-        }
-        else {
-            this.total = this.producto.precio * this.vendido;
-        }
-        this.orden.calcularTotal();
-    };
-    DetalleOrden.prototype.minusVendido = function () {
-        this.vendido = this.minus(this.vendido);
-        this.calcularTotal();
-    };
-    DetalleOrden.prototype.addVendido = function () {
-        this.vendido = this.add(this.vendido);
-        this.calcularTotal();
-    };
-    DetalleOrden.prototype.minusFeria = function () {
-        this.feria = this.minus(this.feria);
-    };
-    DetalleOrden.prototype.addFeria = function () {
-        this.feria = this.add(this.feria);
-    };
-    DetalleOrden.prototype.isEffectivo = function () {
-        return this.tipoPago == _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].EFECTIVO;
-    };
-    DetalleOrden.prototype.minus = function (currentValue) {
-        currentValue = currentValue - 1;
-        return currentValue < 0 ? 0 : currentValue;
-    };
-    DetalleOrden.prototype.add = function (currentValue) {
-        currentValue = currentValue + 1;
-        return currentValue;
-    };
-    DetalleOrden.ctorParameters = function () { return [
-        { type: _producto_model__WEBPACK_IMPORTED_MODULE_0__["Producto"] },
-        { type: _orden_model__WEBPACK_IMPORTED_MODULE_2__["Orden"] }
-    ]; };
-    return DetalleOrden;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/models/gasto.model.ts":
-/*!***********************************!*\
-  !*** ./src/models/gasto.model.ts ***!
-  \***********************************/
-/*! exports provided: Gasto */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Gasto", function() { return Gasto; });
-var Gasto = /** @class */ (function () {
-    function Gasto(id, recurrente, concepto, recurrencia, fechaPagado, montoReferencia, montoPagado) {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Expense", function() { return Expense; });
+var Expense = /** @class */ (function () {
+    function Expense(id, recurrente, concepto, recurrencia, fechaPagado, montoReferencia, montoPagado) {
         this.id = id;
         this.recurrente = recurrente;
         this.concepto = concepto;
@@ -870,9 +947,8 @@ var Gasto = /** @class */ (function () {
         this.fechaPagado = fechaPagado;
         this.montoReferencia = montoReferencia;
         this.montoPagado = montoPagado;
-        console.log(montoPagado);
     }
-    Gasto.prototype.getRowForGastos = function () {
+    Expense.prototype.getRowForGastos = function () {
         var row = new Array();
         row.push(this.id);
         row.push(this.concepto);
@@ -889,10 +965,10 @@ var Gasto = /** @class */ (function () {
         row.push(this.montoPagado);
         return row;
     };
-    Gasto.createEmptyGasto = function () {
-        return new Gasto(-1, false, "", null, null, null, null);
+    Expense.createEmptyGasto = function () {
+        return new Expense(-1, false, "", null, null, null, null);
     };
-    Gasto.ctorParameters = function () { return [
+    Expense.ctorParameters = function () { return [
         { type: Number },
         { type: Boolean },
         { type: String },
@@ -901,51 +977,130 @@ var Gasto = /** @class */ (function () {
         { type: Number },
         { type: Number }
     ]; };
-    return Gasto;
+    return Expense;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/models/orden.model.ts":
-/*!***********************************!*\
-  !*** ./src/models/orden.model.ts ***!
-  \***********************************/
-/*! exports provided: Orden */
+/***/ "./src/models/order-line.model.ts":
+/*!****************************************!*\
+  !*** ./src/models/order-line.model.ts ***!
+  \****************************************/
+/*! exports provided: OrderLine */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Orden", function() { return Orden; });
-/* harmony import */ var _detalle_orden_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./detalle.orden.model */ "./src/models/detalle.orden.model.ts");
-/* harmony import */ var _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tipo.pago.model */ "./src/models/tipo.pago.model.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderLine", function() { return OrderLine; });
+/* harmony import */ var _product_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product.model */ "./src/models/product.model.ts");
+/* harmony import */ var _payment_method_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-method.model */ "./src/models/payment-method.model.ts");
+/* harmony import */ var _order_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./order.model */ "./src/models/order.model.ts");
 
 
-var Orden = /** @class */ (function () {
-    function Orden(productos) {
+
+var OrderLine = /** @class */ (function () {
+    function OrderLine(producto, orden) {
+        this.vendido = 0;
+        this.feria = 0;
+        this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
+        this.total = 0;
+        this.producto = producto;
+        this.orden = orden;
+    }
+    // style guide / naming conventions 
+    // https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html#variable-and-function
+    OrderLine.createEmptyDetalleOrden = function (orden) {
+        return new OrderLine(_product_model__WEBPACK_IMPORTED_MODULE_0__["Product"].createEmptyProduct(), orden);
+    };
+    OrderLine.prototype.onChangeVendido = function (vendido) {
+        this.vendido = vendido;
+        this.calcularTotal();
+    };
+    OrderLine.prototype.calcularTotal = function () {
+        if (!this.producto.precio || !this.vendido) {
+            this.total = 0;
+        }
+        else {
+            this.total = this.producto.precio * this.vendido;
+        }
+        this.orden.calcularTotal();
+    };
+    OrderLine.prototype.minusVendido = function () {
+        this.vendido = this.minus(this.vendido);
+        this.calcularTotal();
+    };
+    OrderLine.prototype.addVendido = function () {
+        this.vendido = this.add(this.vendido);
+        this.calcularTotal();
+    };
+    OrderLine.prototype.minusFeria = function () {
+        this.feria = this.minus(this.feria);
+    };
+    OrderLine.prototype.addFeria = function () {
+        this.feria = this.add(this.feria);
+    };
+    OrderLine.prototype.isEffectivo = function () {
+        return this.tipoPago == _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
+    };
+    OrderLine.prototype.minus = function (currentValue) {
+        currentValue = currentValue - 1;
+        return currentValue < 0 ? 0 : currentValue;
+    };
+    OrderLine.prototype.add = function (currentValue) {
+        currentValue = currentValue + 1;
+        return currentValue;
+    };
+    OrderLine.ctorParameters = function () { return [
+        { type: _product_model__WEBPACK_IMPORTED_MODULE_0__["Product"] },
+        { type: _order_model__WEBPACK_IMPORTED_MODULE_2__["Order"] }
+    ]; };
+    return OrderLine;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/models/order.model.ts":
+/*!***********************************!*\
+  !*** ./src/models/order.model.ts ***!
+  \***********************************/
+/*! exports provided: Order */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Order", function() { return Order; });
+/* harmony import */ var _order_line_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./order-line.model */ "./src/models/order-line.model.ts");
+/* harmony import */ var _payment_method_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-method.model */ "./src/models/payment-method.model.ts");
+
+
+var Order = /** @class */ (function () {
+    function Order(productos) {
         this.detalleOrdenList = [];
         this.total = 0;
-        this.tipoPago = _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].EFECTIVO;
+        this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
         for (var p in productos) {
-            this.detalleOrdenList.push(new _detalle_orden_model__WEBPACK_IMPORTED_MODULE_0__["DetalleOrden"](productos[p], this));
+            this.detalleOrdenList.push(new _order_line_model__WEBPACK_IMPORTED_MODULE_0__["OrderLine"](productos[p], this));
         }
     }
-    Orden.prototype.reset = function () {
+    Order.prototype.reset = function () {
         for (var detalleOrden in this.detalleOrdenList) {
-            this.detalleOrdenList[detalleOrden].tipoPago = _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].EFECTIVO;
+            this.detalleOrdenList[detalleOrden].tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
             this.detalleOrdenList[detalleOrden].vendido = 0;
             this.detalleOrdenList[detalleOrden].feria = 0;
             this.detalleOrdenList[detalleOrden].calcularTotal();
         }
     };
-    Orden.prototype.calcularTotal = function () {
+    Order.prototype.calcularTotal = function () {
         this.total = 0;
         for (var detalleOrden in this.detalleOrdenList) {
             this.total += this.detalleOrdenList[detalleOrden].total;
         }
     };
-    Orden.prototype.getRowsForVenta = function () {
+    Order.prototype.getRowsForVenta = function () {
         var newVentas = new Array();
         var now = new Date();
         var date = now.toLocaleDateString() + " " + now.toLocaleTimeString();
@@ -954,7 +1109,7 @@ var Orden = /** @class */ (function () {
             if (detalleOrden.vendido > 0) {
                 var row = new Array();
                 row.push(date);
-                row.push(this.tipoPago == _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].EFECTIVO ? "Efectivo" : "Tarjeta");
+                row.push(this.tipoPago == _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH ? "Efectivo" : "Tarjeta");
                 row.push(detalleOrden.producto.id + "");
                 row.push(detalleOrden.producto.precio + "");
                 row.push(detalleOrden.vendido + "");
@@ -964,40 +1119,61 @@ var Orden = /** @class */ (function () {
         }
         return newVentas;
     };
-    Orden.prototype.toggleTipoPago = function () {
+    Order.prototype.toggleTipoPago = function () {
         switch (this.tipoPago) {
-            case _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].EFECTIVO:
-                this.tipoPago = _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].TARJETA;
+            case _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH:
+                this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CREDIT_DEBIT;
                 break;
-            case _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].TARJETA:
-                this.tipoPago = _tipo_pago_model__WEBPACK_IMPORTED_MODULE_1__["TipoPago"].EFECTIVO;
+            case _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CREDIT_DEBIT:
+                this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
                 break;
         }
     };
-    Orden.ctorParameters = function () { return [
+    Order.ctorParameters = function () { return [
         { type: Array }
     ]; };
-    return Orden;
+    return Order;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/models/producto.model.ts":
-/*!**************************************!*\
-  !*** ./src/models/producto.model.ts ***!
-  \**************************************/
-/*! exports provided: Producto */
+/***/ "./src/models/payment-method.model.ts":
+/*!********************************************!*\
+  !*** ./src/models/payment-method.model.ts ***!
+  \********************************************/
+/*! exports provided: PaymentMethod */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Producto", function() { return Producto; });
-var Producto = /** @class */ (function () {
-    function Producto(id, nombre, precio, order) {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentMethod", function() { return PaymentMethod; });
+var PaymentMethod;
+(function (PaymentMethod) {
+    PaymentMethod["CREDIT_DEBIT"] = "Tarjeta";
+    PaymentMethod["CASH"] = "Efectivo";
+})(PaymentMethod || (PaymentMethod = {}));
+
+
+/***/ }),
+
+/***/ "./src/models/product.model.ts":
+/*!*************************************!*\
+  !*** ./src/models/product.model.ts ***!
+  \*************************************/
+/*! exports provided: Product */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Product", function() { return Product; });
+var Product = /** @class */ (function () {
+    function Product(id, nombre, precio, tipo, order) {
+        this.precio = -1;
         this.id = id;
         this.nombre = nombre;
+        this.tipo = tipo;
         // if price is less than zero then we treat them all as null
         if (precio >= 0) {
             this.precio = precio;
@@ -1007,7 +1183,7 @@ var Producto = /** @class */ (function () {
         }
         this.order = order;
     }
-    Producto.prototype.getRowForCatalogs = function () {
+    Product.prototype.getRowForCatalogs = function () {
         var row = new Array();
         row.push(this.id);
         row.push(this.nombre);
@@ -1015,37 +1191,845 @@ var Producto = /** @class */ (function () {
         row.push(this.order);
         return row;
     };
-    Producto.createEmptyProduct = function () {
-        return new Producto(-1, "", -1, -1);
+    Product.createEmptyProduct = function () {
+        return new Product(-1, "", -1, "", -1);
     };
-    Producto.ctorParameters = function () { return [
+    Product.prototype.isOwned = function () {
+        return "propio" == this.tipo.toLowerCase();
+    };
+    Product.ctorParameters = function () { return [
         { type: Number },
         { type: String },
         { type: Number },
+        { type: String },
         { type: Number }
     ]; };
-    return Producto;
+    return Product;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/models/tipo.pago.model.ts":
-/*!***************************************!*\
-  !*** ./src/models/tipo.pago.model.ts ***!
-  \***************************************/
-/*! exports provided: TipoPago */
+/***/ "./src/models/production-line.model.ts":
+/*!*********************************************!*\
+  !*** ./src/models/production-line.model.ts ***!
+  \*********************************************/
+/*! exports provided: ProductionLine */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TipoPago", function() { return TipoPago; });
-var TipoPago;
-(function (TipoPago) {
-    TipoPago["TARJETA"] = "Tarjeta";
-    TipoPago["EFECTIVO"] = "Efectivo";
-})(TipoPago || (TipoPago = {}));
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductionLine", function() { return ProductionLine; });
+/* harmony import */ var _product_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product.model */ "./src/models/product.model.ts");
+
+var ProductionLine = /** @class */ (function () {
+    function ProductionLine(product, date, production) {
+        this._production = 0;
+        this._product = product;
+        this._date = date;
+        this._production = production;
+    }
+    Object.defineProperty(ProductionLine.prototype, "product", {
+        get: function () {
+            return this._product;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductionLine.prototype, "date", {
+        get: function () {
+            return this._date;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductionLine.prototype, "production", {
+        get: function () {
+            return this._production;
+        },
+        set: function (production) {
+            this._production = production;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProductionLine.ctorParameters = function () { return [
+        { type: _product_model__WEBPACK_IMPORTED_MODULE_0__["Product"] },
+        { type: Date },
+        { type: Number }
+    ]; };
+    return ProductionLine;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/models/production-product.model.ts":
+/*!************************************************!*\
+  !*** ./src/models/production-product.model.ts ***!
+  \************************************************/
+/*! exports provided: ProductionProduct */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductionProduct", function() { return ProductionProduct; });
+/* harmony import */ var _product_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product.model */ "./src/models/product.model.ts");
+
+var ProductionProduct = /** @class */ (function () {
+    function ProductionProduct(_product) {
+        this._product = _product;
+        this._productionLines = [];
+        this._production = 0;
+        this._productionTotal = 0;
+    }
+    Object.defineProperty(ProductionProduct.prototype, "product", {
+        get: function () {
+            return this._product;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductionProduct.prototype, "productionLines", {
+        get: function () {
+            return this._productionLines;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductionProduct.prototype, "productionTotal", {
+        get: function () {
+            return this._productionTotal;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductionProduct.prototype, "production", {
+        get: function () {
+            return this._production;
+        },
+        set: function (production) {
+            this._production = production;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProductionProduct.prototype.addProductionLine = function (productionLine) {
+        if (productionLine.product.id != this._product.id) {
+            throw new Error('Invalid product line for this product');
+        }
+        this._productionTotal = this._productionTotal + productionLine.production;
+        this._productionLines.push(productionLine);
+    };
+    ProductionProduct.ctorParameters = function () { return [
+        { type: _product_model__WEBPACK_IMPORTED_MODULE_0__["Product"] }
+    ]; };
+    return ProductionProduct;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/models/wasted-line.model.ts":
+/*!*****************************************!*\
+  !*** ./src/models/wasted-line.model.ts ***!
+  \*****************************************/
+/*! exports provided: WastedLine */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WastedLine", function() { return WastedLine; });
+/* harmony import */ var _product_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product.model */ "./src/models/product.model.ts");
+
+var WastedLine = /** @class */ (function () {
+    function WastedLine(product, date, wasted) {
+        this._wasted = 0;
+        this._product = product;
+        this._date = date;
+        this._wasted = wasted;
+    }
+    Object.defineProperty(WastedLine.prototype, "product", {
+        get: function () {
+            return this._product;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WastedLine.prototype, "date", {
+        get: function () {
+            return this._date;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WastedLine.prototype, "wasted", {
+        get: function () {
+            return this._wasted;
+        },
+        set: function (wasted) {
+            this._wasted = wasted;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    WastedLine.ctorParameters = function () { return [
+        { type: _product_model__WEBPACK_IMPORTED_MODULE_0__["Product"] },
+        { type: Date },
+        { type: Number }
+    ]; };
+    return WastedLine;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/models/wasted-product.model.ts":
+/*!********************************************!*\
+  !*** ./src/models/wasted-product.model.ts ***!
+  \********************************************/
+/*! exports provided: WastedProduct */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WastedProduct", function() { return WastedProduct; });
+/* harmony import */ var _product_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product.model */ "./src/models/product.model.ts");
+
+var WastedProduct = /** @class */ (function () {
+    function WastedProduct(_product) {
+        this._product = _product;
+        this._wastedLines = [];
+        this._wasted = 0;
+        this._wastedTotal = 0;
+    }
+    Object.defineProperty(WastedProduct.prototype, "product", {
+        get: function () {
+            return this._product;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WastedProduct.prototype, "wastedLines", {
+        get: function () {
+            return this._wastedLines;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WastedProduct.prototype, "wastedTotal", {
+        get: function () {
+            return this._wastedTotal;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(WastedProduct.prototype, "wasted", {
+        get: function () {
+            return this._wasted;
+        },
+        set: function (wasted) {
+            this._wasted = wasted;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    WastedProduct.prototype.addWastedLine = function (wastedLine) {
+        if (wastedLine.product.id != this._product.id) {
+            throw new Error('Invalid wasted line for this product');
+        }
+        this._wastedTotal = this._wastedTotal + wastedLine.wasted;
+        this._wastedLines.push(wastedLine);
+    };
+    WastedProduct.ctorParameters = function () { return [
+        { type: _product_model__WEBPACK_IMPORTED_MODULE_0__["Product"] }
+    ]; };
+    return WastedProduct;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/services/base.service.ts":
+/*!**************************************!*\
+  !*** ./src/services/base.service.ts ***!
+  \**************************************/
+/*! exports provided: BaseService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseService", function() { return BaseService; });
+var BaseService = /** @class */ (function () {
+    function BaseService() {
+    }
+    //public static spreadsheetId = '1oajvWQJIqPETOX-FxzFNvTcwf1K2KeuNnGKJ-aHGDmo'; // ID of Esteban spreadsheet vrs1, se toma del URL
+    //public static spreadsheetId = '19ltkEfpGBfd7xiPx9UlpGwyhV2v-diAMgFom8XVrhD4'; // ID of Pedro spreadsheet vrs2, se toma del URL
+    BaseService.SPREADSHEET_ID = '1B5cYzMJ4vc6ewk9RODCUqIVlYFqkWDrLToXrsUHIALs'; // ID of Esteban spreadsheet vrs2, se toma del URL
+    // From https://developers.google.com/sheets/api/guides/values:
+    // USER_ENTERED = The input is parsed exactly as if it were entered into the Google Sheets UI, so "Mar 1 2016" becomes a date, and "=1+2" becomes a formula. Formats may also be inferred, so "$100.15" becomes a number with currency formatting.
+    BaseService.VALUE_INPUT_OPTION = "USER_ENTERED";
+    // From https://developers.google.com/sheets/api/reference/rest/v4/ValueRenderOption
+    // UNFORMATTED_VALUE = Values will be calculated, but not formatted in the reply. For example, if A1 is 1.23 and A2 is =A1 and formatted as currency, then A2 would return the number 1.23.
+    BaseService.VALUE_RENDER_OPTION = "UNFORMATTED_VALUE";
+    // From https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption
+    // FORMATTED_STRING = Instructs date, time, datetime, and duration fields to be output as strings in their given number format (which is dependent on the spreadsheet locale).
+    BaseService.DATE_TIME_RENDER_OPTION = "FORMATTED_STRING";
+    return BaseService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/services/expense-service.service.ts":
+/*!*************************************************!*\
+  !*** ./src/services/expense-service.service.ts ***!
+  \*************************************************/
+/*! exports provided: ExpenseService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExpenseService", function() { return ExpenseService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _base_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base.service */ "./src/services/base.service.ts");
+/* harmony import */ var _models_expense_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/expense.model */ "./src/models/expense.model.ts");
+/* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+
+
+
+
+
+var ExpenseService = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ExpenseService, _super);
+    function ExpenseService(gapiSession) {
+        var _this = _super.call(this) || this;
+        _this.gapiSession = gapiSession;
+        _this._allExpenses = [];
+        _this._recurrenteExpenses = [];
+        _this._ocasionalExpenses = [];
+        return _this;
+    }
+    ExpenseService_1 = ExpenseService;
+    Object.defineProperty(ExpenseService.prototype, "allExpenses", {
+        get: function () {
+            return this._allExpenses;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ExpenseService.prototype, "recurrenteExpenses", {
+        get: function () {
+            return this._recurrenteExpenses;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ExpenseService.prototype, "ocasionalExpenses", {
+        get: function () {
+            return this._ocasionalExpenses;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ExpenseService.prototype.initExpenseService = function () {
+        var _this = this;
+        if (!this._initExpenseServicePromise) {
+            this._initExpenseServicePromise = this._loadRecurrentExpenses().then(function () {
+                return _this._loadOcasionalExpenses();
+            });
+        }
+        if (!this._initExpenseServicePromiseSolved) {
+            return this._initExpenseServicePromise;
+        }
+        else {
+            Promise.resolve("initialized");
+        }
+    };
+    ExpenseService.prototype.saveExpense = function (expense) {
+        // determine the row where to insert or update the info
+        var listoOfExpenseses = [];
+        var rowIndexToUpdate = ExpenseService_1.RANGE_OCASIONAL_EXPENSES_ADD_ROW + (expense.id > 0 ? (1 + expense.id) : (2 + this._ocasionalExpenses.length));
+        if (expense.recurrente) {
+            listoOfExpenseses = this._recurrenteExpenses;
+            rowIndexToUpdate = ExpenseService_1.RANGE_RECURRENT_EXPENSES_ADD_ROW;
+            expense.montoReferencia = expense.montoPagado; // we save the last amount paid for each recurrent expense
+        }
+        else {
+            listoOfExpenseses = this._ocasionalExpenses;
+            rowIndexToUpdate = ExpenseService_1.RANGE_OCASIONAL_EXPENSES_ADD_ROW;
+        }
+        rowIndexToUpdate = rowIndexToUpdate + (expense.id > 0 ? (1 + expense.id) : (2 + listoOfExpenseses.length));
+        return gapi.client.request({
+            method: 'POST',
+            // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
+            path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].SPREADSHEET_ID + "/values:batchUpdate",
+            body: {
+                valueInputOption: _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_INPUT_OPTION,
+                data: [
+                    {
+                        range: rowIndexToUpdate,
+                        values: [
+                            expense.getRowForGastos()
+                        ]
+                    }
+                ]
+            }
+        }).then(function (response) {
+            this._allExpenses.push(expense);
+            listoOfExpenseses.push(expense);
+        });
+    };
+    ExpenseService.prototype._loadRecurrentExpenses = function () {
+        var _this = this;
+        return this.gapiSession.initClient("Expense Service").then(function () {
+            return gapi.client.request({
+                method: 'GET',
+                // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+                path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].SPREADSHEET_ID + "/values/" + ExpenseService_1.RANGE_RECURRENT_EXPENSES + "?valueRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_RENDER_OPTION + "&dateTimeRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].DATE_TIME_RENDER_OPTION
+            }).then(function (expenseRange) {
+                _this._initExpenseServicePromiseSolved = true;
+                var expensesList = expenseRange.result["values"];
+                if (expensesList) {
+                    for (var i = 0; i < expensesList.length; i++) {
+                        var expenseFromSheet = expensesList[i];
+                        var expense = new _models_expense_model__WEBPACK_IMPORTED_MODULE_3__["Expense"](expenseFromSheet[0], true, expenseFromSheet[1], expenseFromSheet[2], expenseFromSheet[4], expenseFromSheet[3], expenseFromSheet[5]);
+                        _this._recurrenteExpenses.push(expense);
+                        _this._allExpenses.push(expense);
+                    }
+                }
+            });
+        });
+    };
+    ExpenseService.prototype._loadOcasionalExpenses = function () {
+        var _this = this;
+        return this.gapiSession.initClient("Product Service").then(function () {
+            return gapi.client.request({
+                method: 'GET',
+                // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+                path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].SPREADSHEET_ID + "/values/" + ExpenseService_1.RANGE_OCASIONAL_EXPENSES + "?valueRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_RENDER_OPTION + "&dateTimeRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].DATE_TIME_RENDER_OPTION
+            }).then(function (res) {
+                (function (gastosRange) {
+                    // necessary to run insice the zone in order to fire the change detection
+                    //this.ngZone.run( () =>
+                    // {
+                    var expensesList = gastosRange.result["values"];
+                    if (expensesList) {
+                        for (var i = 0; i < expensesList.length; i++) {
+                            var expenseFromSheet = expensesList[i];
+                            // 0 = id, 1 = Concepto, 2 = Fecha Pagado, 3 = Monto Pagado
+                            var gasto = new _models_expense_model__WEBPACK_IMPORTED_MODULE_3__["Expense"](expenseFromSheet[0], false, expenseFromSheet[1], null, expenseFromSheet[2], null, expenseFromSheet[3]);
+                            _this._ocasionalExpenses.push(gasto);
+                            _this._allExpenses.push(gasto);
+                        }
+                    }
+                });
+            });
+        });
+    };
+    var ExpenseService_1;
+    ExpenseService.RANGE_RECURRENT_EXPENSES = 'ControlGastosRecurrentes!A2:G';
+    ExpenseService.RANGE_RECURRENT_EXPENSES_ADD_ROW = 'ControlGastosRecurrentes!A';
+    ExpenseService.RANGE_OCASIONAL_EXPENSES = 'ControlGastosOcasionales!A2:D';
+    ExpenseService.RANGE_OCASIONAL_EXPENSES_ADD_ROW = 'ControlGastosOcasionales!A';
+    ExpenseService.ctorParameters = function () { return [
+        { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_4__["GapiSession"] }
+    ]; };
+    ExpenseService = ExpenseService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        })
+    ], ExpenseService);
+    return ExpenseService;
+}(_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"]));
+
+
+
+/***/ }),
+
+/***/ "./src/services/product.service.ts":
+/*!*****************************************!*\
+  !*** ./src/services/product.service.ts ***!
+  \*****************************************/
+/*! exports provided: ProductService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductService", function() { return ProductService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _models_product_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../models/product.model */ "./src/models/product.model.ts");
+/* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+/* harmony import */ var _base_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base.service */ "./src/services/base.service.ts");
+
+/**
+ * ng generate service ../services/Product
+ */
+
+
+
+
+var ProductService = /** @class */ (function () {
+    function ProductService(gapiSession) {
+        this.gapiSession = gapiSession;
+        this._allProductos = [];
+        this._allOwnedProducts = [];
+    }
+    ProductService_1 = ProductService;
+    Object.defineProperty(ProductService.prototype, "allProducts", {
+        get: function () {
+            return this._allProductos;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductService.prototype, "allOwnedProducts", {
+        get: function () {
+            return this._allOwnedProducts;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProductService.prototype.initProductService = function () {
+        if (!this._initProductServicePromise) {
+            this._initProductServicePromise = this._loadProducts();
+        }
+        if (!this._initProductServicePromiseSolved) {
+            return this._initProductServicePromise;
+        }
+        else {
+            Promise.resolve("initialized");
+        }
+    };
+    ProductService.prototype.findProductById = function (productId) {
+        return this.allProducts.find(function (p) { return p.id == productId; });
+    };
+    ProductService.prototype._loadProducts = function () {
+        var _this = this;
+        return this.gapiSession.initClient("Product Service").then(function () {
+            return gapi.client.request({
+                method: 'GET',
+                // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+                path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].SPREADSHEET_ID + "/values/" + ProductService_1.RANGE_PRODUCT + "?valueRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_RENDER_OPTION
+            }).then(function (productosRangeResponse) {
+                _this._initProductServicePromiseSolved = true;
+                var productList = productosRangeResponse.result["values"];
+                if (productList) {
+                    for (var i = 0; i < productList.length; i++) {
+                        var productFromSheet = productList[i];
+                        if (productFromSheet[3] && productFromSheet[3] != "") { // productos with order 0 are considered deleted
+                            // 0=Id, 1 = Name, 2 = Price, 4 = Tipo, 3 = Order
+                            /*
+                               "values": [
+                                  [
+                                     1,
+                                     "Pan blanco",
+                                     500,
+                                     1
+                                  ],
+                            */
+                            var product = new _models_product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](productFromSheet[0], productFromSheet[1], productFromSheet[2], productFromSheet[3], productFromSheet[4]);
+                            _this._allProductos.push(product);
+                            if (product.isOwned()) {
+                                _this._allOwnedProducts.push(product);
+                            }
+                        }
+                    }
+                }
+                _this._allProductos.sort(function (p1, p2) { return p1.order - p2.order; });
+                _this._allOwnedProducts.sort(function (p1, p2) { return p1.order - p2.order; });
+                console.log("Products loaded");
+            });
+        });
+    };
+    var ProductService_1;
+    ProductService.RANGE_PRODUCT = 'CatalogoProductos!A2:E';
+    ProductService.ctorParameters = function () { return [
+        { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__["GapiSession"] }
+    ]; };
+    ProductService = ProductService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        })
+    ], ProductService);
+    return ProductService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/services/production.service.ts":
+/*!********************************************!*\
+  !*** ./src/services/production.service.ts ***!
+  \********************************************/
+/*! exports provided: ProductionService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductionService", function() { return ProductionService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/models/production-line.model */ "./src/models/production-line.model.ts");
+/* harmony import */ var src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+/* harmony import */ var _base_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base.service */ "./src/services/base.service.ts");
+/* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./product.service */ "./src/services/product.service.ts");
+/* harmony import */ var src_models_production_product_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/models/production-product.model */ "./src/models/production-product.model.ts");
+
+
+
+
+
+
+
+var ProductionService = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](ProductionService, _super);
+    function ProductionService(gapiSession, productService) {
+        var _this = _super.call(this) || this;
+        _this.gapiSession = gapiSession;
+        _this.productService = productService;
+        _this._allProduction = [];
+        return _this;
+    }
+    ProductionService_1 = ProductionService;
+    Object.defineProperty(ProductionService.prototype, "allProduction", {
+        get: function () {
+            return this._allProduction;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProductionService.prototype.initProductionServiceService = function () {
+        var _this = this;
+        if (!this._initProductionServicePromise) {
+            this._initProductionServicePromise = this.productService.initProductService().then(function () { return _this._loadProductionLines(); });
+        }
+        if (!this._initProductionServicePromiseSolved) {
+            return this._initProductionServicePromise;
+        }
+        else {
+            Promise.resolve("initialized");
+        }
+    };
+    ProductionService.prototype._loadProductionLines = function () {
+        var _this = this;
+        return this.gapiSession.initClient("Production Service").then(function () {
+            return gapi.client.request({
+                method: 'GET',
+                // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+                path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].SPREADSHEET_ID + "/values/" + ProductionService_1.RANGE_PRODUCTION + "?valueRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_RENDER_OPTION + "&dateTimeRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].DATE_TIME_RENDER_OPTION
+            }).then(function (productionRange) {
+                _this.productService.allOwnedProducts.forEach(function (p) {
+                    _this._allProduction.push(new src_models_production_product_model__WEBPACK_IMPORTED_MODULE_6__["ProductionProduct"](p));
+                });
+                _this._initProductionServicePromiseSolved = true;
+                var productionList = productionRange.result["values"];
+                if (productionList) {
+                    for (var i = 0; i < productionList.length; i++) {
+                        var productionLineFromSheet = productionList[i];
+                        // 0 = Id Producto, 2 = Fecha,  1 = Producido
+                        var productionByProduct = _this._allProduction.find(function (pl) { return pl.product.id == productionLineFromSheet[0]; });
+                        if (productionByProduct) {
+                            var productionLine = new src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__["ProductionLine"](productionByProduct.product, productionLineFromSheet[1], productionLineFromSheet[2]);
+                            productionByProduct.addProductionLine(productionLine);
+                        }
+                        else {
+                            console.warn("A ProductionProduct was not found. Was the ControlProduccion modified manually?. Check all products in that list are of Tipo Propio");
+                        }
+                    }
+                }
+            });
+        });
+    };
+    ProductionService.prototype.saveProduction = function () {
+        var productionListToSave = new Array();
+        this._allProduction.forEach(function (p) {
+            if (p.production > 0) {
+                p.addProductionLine(new src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__["ProductionLine"](p.product, new Date(), p.production));
+                p.production = 0;
+            }
+            p.productionLines.forEach(function (pl) {
+                var row = new Array();
+                row.push(pl.product.id);
+                row.push(pl.date);
+                row.push(pl.production);
+                productionListToSave.push(row);
+            });
+        });
+        // Registers the Efectivo and the Tarjeta
+        return gapi.client.request({
+            method: 'POST',
+            // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
+            path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].SPREADSHEET_ID + "/values:batchUpdate",
+            body: {
+                valueInputOption: _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_INPUT_OPTION,
+                data: [
+                    {
+                        range: ProductionService_1.RANGE_PRODUCTION_ADD_ROW,
+                        values: productionListToSave
+                    }
+                ]
+            }
+        });
+    };
+    var ProductionService_1;
+    ProductionService.RANGE_PRODUCTION = 'ControlProduccion!A2:C';
+    ProductionService.RANGE_PRODUCTION_ADD_ROW = 'ControlProduccion!A2';
+    ProductionService.CONTROL_PRODUCCION_ID = 961378869;
+    ProductionService.ctorParameters = function () { return [
+        { type: src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__["GapiSession"] },
+        { type: _product_service__WEBPACK_IMPORTED_MODULE_5__["ProductService"] }
+    ]; };
+    ProductionService = ProductionService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        })
+    ], ProductionService);
+    return ProductionService;
+}(_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"]));
+
+
+
+/***/ }),
+
+/***/ "./src/services/wasted.service.ts":
+/*!****************************************!*\
+  !*** ./src/services/wasted.service.ts ***!
+  \****************************************/
+/*! exports provided: WastedService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WastedService", function() { return WastedService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+/* harmony import */ var _base_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./base.service */ "./src/services/base.service.ts");
+/* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product.service */ "./src/services/product.service.ts");
+/* harmony import */ var src_models_wasted_product_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/models/wasted-product.model */ "./src/models/wasted-product.model.ts");
+/* harmony import */ var src_models_wasted_line_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/models/wasted-line.model */ "./src/models/wasted-line.model.ts");
+
+
+
+
+
+
+
+var WastedService = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](WastedService, _super);
+    function WastedService(gapiSession, productService) {
+        var _this = _super.call(this) || this;
+        _this.gapiSession = gapiSession;
+        _this.productService = productService;
+        _this._allWasted = [];
+        return _this;
+    }
+    WastedService_1 = WastedService;
+    Object.defineProperty(WastedService.prototype, "allWasted", {
+        get: function () {
+            return this._allWasted;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    WastedService.prototype.initWastedService = function () {
+        var _this = this;
+        if (!this._initWastedServicePromise) {
+            this._initWastedServicePromise = this.productService.initProductService().then(function () { return _this._loadWastedLines(); });
+        }
+        if (!this._initWastedServicePromiseSolved) {
+            return this._initWastedServicePromise;
+        }
+        else {
+            Promise.resolve("initialized");
+        }
+    };
+    WastedService.prototype._loadWastedLines = function () {
+        var _this = this;
+        return this.gapiSession.initClient("Wasted Service").then(function () {
+            return gapi.client.request({
+                method: 'GET',
+                // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
+                path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].SPREADSHEET_ID + "/values/" + WastedService_1.RANGE_WASTED + "?valueRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].VALUE_RENDER_OPTION + "&dateTimeRenderOption=" + _base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].DATE_TIME_RENDER_OPTION
+            }).then(function (productionRange) {
+                _this.productService.allOwnedProducts.forEach(function (p) {
+                    _this._allWasted.push(new src_models_wasted_product_model__WEBPACK_IMPORTED_MODULE_5__["WastedProduct"](p));
+                });
+                _this._initWastedServicePromiseSolved = true;
+                var productionList = productionRange.result["values"];
+                if (productionList) {
+                    for (var i = 0; i < productionList.length; i++) {
+                        var productionLineFromSheet = productionList[i];
+                        // 0 = Id Producto, 2 = Fecha,  1 = Perdido
+                        var wastedByProduct = _this._allWasted.find(function (pl) { return pl.product.id == productionLineFromSheet[0]; });
+                        if (wastedByProduct) {
+                            var wastedLine = new src_models_wasted_line_model__WEBPACK_IMPORTED_MODULE_6__["WastedLine"](wastedByProduct.product, productionLineFromSheet[1], productionLineFromSheet[2]);
+                            wastedByProduct.addWastedLine(wastedLine);
+                        }
+                        else {
+                            console.warn("A WastedProduct was not found. Was the ControlPerdidas modified manually?. Check all products in that list are of Tipo Propio");
+                        }
+                    }
+                }
+            });
+        });
+    };
+    WastedService.prototype.saveWasted = function () {
+        var wastedListToSave = new Array();
+        this._allWasted.forEach(function (p) {
+            if (p.wasted > 0) {
+                p.addWastedLine(new src_models_wasted_line_model__WEBPACK_IMPORTED_MODULE_6__["WastedLine"](p.product, new Date(), p.wasted));
+                p.wasted = 0;
+            }
+            p.wastedLines.forEach(function (pl) {
+                var row = new Array();
+                row.push(pl.product.id);
+                row.push(pl.date);
+                row.push(pl.wasted);
+                wastedListToSave.push(row);
+            });
+        });
+        // Registers the Efectivo and the Tarjeta
+        return gapi.client.request({
+            method: 'POST',
+            // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
+            path: "https://sheets.googleapis.com/v4/spreadsheets/" + _base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].SPREADSHEET_ID + "/values:batchUpdate",
+            body: {
+                valueInputOption: _base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].VALUE_INPUT_OPTION,
+                data: [
+                    {
+                        range: WastedService_1.RANGE_WASTED_ADD_ROW,
+                        values: wastedListToSave
+                    }
+                ]
+            }
+        });
+    };
+    var WastedService_1;
+    WastedService.RANGE_WASTED = 'ControlPerdidas!A2:C';
+    WastedService.RANGE_WASTED_ADD_ROW = 'ControlPerdidas!A2';
+    WastedService.ctorParameters = function () { return [
+        { type: src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
+        { type: _product_service__WEBPACK_IMPORTED_MODULE_4__["ProductService"] }
+    ]; };
+    WastedService = WastedService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        })
+    ], WastedService);
+    return WastedService;
+}(_base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"]));
+
 
 
 /***/ }),
