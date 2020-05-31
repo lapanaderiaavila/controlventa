@@ -600,16 +600,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProduccionComponent", function() { return ProduccionComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var src_services_production_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/production.service */ "./src/services/production.service.ts");
+/* harmony import */ var src_services_production_owned_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/production-owned.service */ "./src/services/production-owned.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 let ProduccionComponent = class ProduccionComponent {
-    constructor(productionService, ngZone) {
-        this.productionService = productionService;
+    constructor(productionOwnedService, ngZone, route) {
+        this.productionOwnedService = productionOwnedService;
         this.ngZone = ngZone;
+        this.route = route;
         this._processing = false;
         this._allProduction = [];
+        this.route.queryParams.subscribe(params => {
+            this._bakeryId = params['pana'];
+            console.log("this._bakeryId = " + this._bakeryId);
+        });
     }
     get allProduction() {
         return this._allProduction;
@@ -618,23 +625,24 @@ let ProduccionComponent = class ProduccionComponent {
         return this._processing;
     }
     ngOnInit() {
-        this.productionService.initProductionServiceService().then(() => {
+        this.productionOwnedService.initProductionServiceService().then(() => {
             this.ngZone.run(() => {
-                this._allProduction = this.productionService.allProduction;
+                this._allProduction = this.productionOwnedService.allProduction;
             });
         });
     }
     saveProduction() {
-        this.productionService.saveProduction().then(() => {
+        this.productionOwnedService.saveProduction().then(() => {
             this.ngZone.run(() => {
-                this._allProduction = this.productionService.allProduction;
+                this._allProduction = this.productionOwnedService.allProduction;
             });
         });
     }
 };
 ProduccionComponent.ctorParameters = () => [
-    { type: src_services_production_service__WEBPACK_IMPORTED_MODULE_2__["ProductionService"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
+    { type: src_services_production_owned_service__WEBPACK_IMPORTED_MODULE_2__["ProductionOwnedService"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
 ];
 ProduccionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1341,11 +1349,23 @@ WastedProduct.ctorParameters = () => [
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseService", function() { return BaseService; });
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 class BaseService {
+    constructor(route) {
+        this.route = route;
+        this.route.queryParams.subscribe(params => {
+            this._bakeryId = params['pana'];
+        });
+    }
+    get sheetId() {
+        let sheetId = (!this._bakeryId || this._bakeryId == 1) ? BaseService.SPREADSHEET_ID_SAN_RA : BaseService.SPREADSHEET_ID_HEREDIA;
+        console.log("using sheet Id : " + sheetId);
+        return sheetId;
+    }
 }
-//public static spreadsheetId = '1oajvWQJIqPETOX-FxzFNvTcwf1K2KeuNnGKJ-aHGDmo'; // ID of Esteban spreadsheet vrs1, se toma del URL
-//public static spreadsheetId = '19ltkEfpGBfd7xiPx9UlpGwyhV2v-diAMgFom8XVrhD4'; // ID of Pedro spreadsheet vrs2, se toma del URL
-BaseService.SPREADSHEET_ID = '1B5cYzMJ4vc6ewk9RODCUqIVlYFqkWDrLToXrsUHIALs'; // ID of Esteban spreadsheet vrs2, se toma del URL
+BaseService.SPREADSHEET_ID_SAN_RA = '1B5cYzMJ4vc6ewk9RODCUqIVlYFqkWDrLToXrsUHIALs'; // ID of Esteban SanRafael spreadsheet vrs2, se toma del URL
+BaseService.SPREADSHEET_ID_HEREDIA = '1s8HNrVy9F_OUjVH4lhYL372x4DyHjfB6wJsu-itE0SI'; // ID of Esteban Heredia spreadsheet vrs2, se toma del URL
 // From https://developers.google.com/sheets/api/guides/values:
 // USER_ENTERED = The input is parsed exactly as if it were entered into the Google Sheets UI, so "Mar 1 2016" becomes a date, and "=1+2" becomes a formula. Formats may also be inferred, so "$100.15" becomes a number with currency formatting.
 BaseService.VALUE_INPUT_OPTION = "USER_ENTERED";
@@ -1355,6 +1375,9 @@ BaseService.VALUE_RENDER_OPTION = "UNFORMATTED_VALUE";
 // From https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption
 // FORMATTED_STRING = Instructs date, time, datetime, and duration fields to be output as strings in their given number format (which is dependent on the spreadsheet locale).
 BaseService.DATE_TIME_RENDER_OPTION = "FORMATTED_STRING";
+BaseService.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_0__["ActivatedRoute"] }
+];
 
 
 /***/ }),
@@ -1374,15 +1397,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base.service */ "./src/services/base.service.ts");
 /* harmony import */ var _models_expense_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/expense.model */ "./src/models/expense.model.ts");
 /* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 var ExpenseService_1;
 
 
 
 
 
+
 let ExpenseService = ExpenseService_1 = class ExpenseService extends _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"] {
-    constructor(gapiSession) {
-        super();
+    constructor(gapiSession, route) {
+        super(route);
         this.gapiSession = gapiSession;
         this._allExpenses = [];
         this._recurrenteExpenses = [];
@@ -1427,7 +1452,7 @@ let ExpenseService = ExpenseService_1 = class ExpenseService extends _base_servi
         return gapi.client.request({
             method: 'POST',
             // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
-            path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].SPREADSHEET_ID}/values:batchUpdate`,
+            path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values:batchUpdate`,
             body: {
                 valueInputOption: _base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_INPUT_OPTION,
                 data: [
@@ -1449,7 +1474,7 @@ let ExpenseService = ExpenseService_1 = class ExpenseService extends _base_servi
             return gapi.client.request({
                 method: 'GET',
                 // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].SPREADSHEET_ID}/values/${ExpenseService_1.RANGE_RECURRENT_EXPENSES}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].DATE_TIME_RENDER_OPTION}`
+                path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values/${ExpenseService_1.RANGE_RECURRENT_EXPENSES}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].DATE_TIME_RENDER_OPTION}`
             }).then((expenseRange) => {
                 this._initExpenseServicePromiseSolved = true;
                 var expensesList = expenseRange.result["values"];
@@ -1469,7 +1494,7 @@ let ExpenseService = ExpenseService_1 = class ExpenseService extends _base_servi
             return gapi.client.request({
                 method: 'GET',
                 // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].SPREADSHEET_ID}/values/${ExpenseService_1.RANGE_OCASIONAL_EXPENSES}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].DATE_TIME_RENDER_OPTION}`
+                path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values/${ExpenseService_1.RANGE_OCASIONAL_EXPENSES}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_2__["BaseService"].DATE_TIME_RENDER_OPTION}`
             }).then((res) => {
                 gastosRange => {
                     // necessary to run insice the zone in order to fire the change detection
@@ -1495,7 +1520,8 @@ ExpenseService.RANGE_RECURRENT_EXPENSES_ADD_ROW = 'ControlGastosRecurrentes!A';
 ExpenseService.RANGE_OCASIONAL_EXPENSES = 'ControlGastosOcasionales!A2:D';
 ExpenseService.RANGE_OCASIONAL_EXPENSES_ADD_ROW = 'ControlGastosOcasionales!A';
 ExpenseService.ctorParameters = () => [
-    { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_4__["GapiSession"] }
+    { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_4__["GapiSession"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }
 ];
 ExpenseService = ExpenseService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1522,6 +1548,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_product_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../models/product.model */ "./src/models/product.model.ts");
 /* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
 /* harmony import */ var _base_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base.service */ "./src/services/base.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 var ProductService_1;
 
 /**
@@ -1531,17 +1558,23 @@ var ProductService_1;
 
 
 
-let ProductService = ProductService_1 = class ProductService {
-    constructor(gapiSession) {
+
+let ProductService = ProductService_1 = class ProductService extends _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"] {
+    constructor(gapiSession, route) {
+        super(route);
         this.gapiSession = gapiSession;
         this._allProductos = [];
         this._allOwnedProducts = [];
+        this._allExternalProducts = [];
     }
     get allProducts() {
         return this._allProductos;
     }
     get allOwnedProducts() {
         return this._allOwnedProducts;
+    }
+    get allExternalProducts() {
+        return this._allExternalProducts;
     }
     initProductService() {
         if (!this._initProductServicePromise) {
@@ -1562,7 +1595,7 @@ let ProductService = ProductService_1 = class ProductService {
             return gapi.client.request({
                 method: 'GET',
                 // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].SPREADSHEET_ID}/values/${ProductService_1.RANGE_PRODUCT}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_RENDER_OPTION}`
+                path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values/${ProductService_1.RANGE_PRODUCT}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_RENDER_OPTION}`
             }).then((productosRangeResponse) => {
                 this._initProductServicePromiseSolved = true;
                 var productList = productosRangeResponse.result["values"];
@@ -1585,11 +1618,15 @@ let ProductService = ProductService_1 = class ProductService {
                             if (product.isOwned()) {
                                 this._allOwnedProducts.push(product);
                             }
+                            else {
+                                this._allExternalProducts.push(product);
+                            }
                         }
                     }
                 }
                 this._allProductos.sort((p1, p2) => p1.order - p2.order);
                 this._allOwnedProducts.sort((p1, p2) => p1.order - p2.order);
+                this._allExternalProducts.sort((p1, p2) => p1.order - p2.order);
                 console.log("Products loaded");
             });
         });
@@ -1597,7 +1634,8 @@ let ProductService = ProductService_1 = class ProductService {
 };
 ProductService.RANGE_PRODUCT = 'CatalogoProductos!A2:E';
 ProductService.ctorParameters = () => [
-    { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__["GapiSession"] }
+    { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__["GapiSession"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }
 ];
 ProductService = ProductService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1609,16 +1647,16 @@ ProductService = ProductService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
 
 /***/ }),
 
-/***/ "./src/services/production.service.ts":
-/*!********************************************!*\
-  !*** ./src/services/production.service.ts ***!
-  \********************************************/
-/*! exports provided: ProductionService */
+/***/ "./src/services/production-base.service.ts":
+/*!*************************************************!*\
+  !*** ./src/services/production-base.service.ts ***!
+  \*************************************************/
+/*! exports provided: BaseProductionService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductionService", function() { return ProductionService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseProductionService", function() { return BaseProductionService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/models/production-line.model */ "./src/models/production-line.model.ts");
@@ -1626,7 +1664,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base.service */ "./src/services/base.service.ts");
 /* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./product.service */ "./src/services/product.service.ts");
 /* harmony import */ var src_models_production_product_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/models/production-product.model */ "./src/models/production-product.model.ts");
-var ProductionService_1;
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 
 
 
@@ -1634,9 +1672,10 @@ var ProductionService_1;
 
 
 
-let ProductionService = ProductionService_1 = class ProductionService extends _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"] {
-    constructor(gapiSession, productService) {
-        super();
+
+let BaseProductionService = class BaseProductionService extends _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"] {
+    constructor(gapiSession, productService, route) {
+        super(route);
         this.gapiSession = gapiSession;
         this.productService = productService;
         this._allProduction = [];
@@ -1660,9 +1699,10 @@ let ProductionService = ProductionService_1 = class ProductionService extends _b
             return gapi.client.request({
                 method: 'GET',
                 // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].SPREADSHEET_ID}/values/${ProductionService_1.RANGE_PRODUCTION}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].DATE_TIME_RENDER_OPTION}`
+                path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values/${this.getRange()}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].DATE_TIME_RENDER_OPTION}`
             }).then((productionRange) => {
-                this.productService.allOwnedProducts.forEach(p => {
+                let products = this.useOwnedProducts() ? this.productService.allOwnedProducts : this.productService.allExternalProducts;
+                products.forEach(p => {
                     this._allProduction.push(new src_models_production_product_model__WEBPACK_IMPORTED_MODULE_6__["ProductionProduct"](p));
                 });
                 this._initProductionServicePromiseSolved = true;
@@ -1677,7 +1717,7 @@ let ProductionService = ProductionService_1 = class ProductionService extends _b
                             productionByProduct.addProductionLine(productionLine);
                         }
                         else {
-                            console.warn("A ProductionProduct was not found. Was the ControlProduccion modified manually?. Check all products in that list are of Tipo Propio");
+                            console.warn("A ProductionProduct was not found. Was the " + this.getRange() + " modified manually?. Check all products in that list are of Tipo Propio");
                         }
                     }
                 }
@@ -1703,12 +1743,12 @@ let ProductionService = ProductionService_1 = class ProductionService extends _b
         return gapi.client.request({
             method: 'POST',
             // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
-            path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].SPREADSHEET_ID}/values:batchUpdate`,
+            path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values:batchUpdate`,
             body: {
                 valueInputOption: _base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_INPUT_OPTION,
                 data: [
                     {
-                        range: ProductionService_1.RANGE_PRODUCTION_ADD_ROW,
+                        range: this.getRangeForAddingNewRow(),
                         values: productionListToSave
                     }
                 ]
@@ -1716,18 +1756,70 @@ let ProductionService = ProductionService_1 = class ProductionService extends _b
         });
     }
 };
-ProductionService.RANGE_PRODUCTION = 'ControlProduccion!A2:C';
-ProductionService.RANGE_PRODUCTION_ADD_ROW = 'ControlProduccion!A2';
-ProductionService.CONTROL_PRODUCCION_ID = 961378869;
-ProductionService.ctorParameters = () => [
+BaseProductionService.ctorParameters = () => [
     { type: src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_3__["GapiSession"] },
-    { type: _product_service__WEBPACK_IMPORTED_MODULE_5__["ProductService"] }
+    { type: _product_service__WEBPACK_IMPORTED_MODULE_5__["ProductService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }
 ];
-ProductionService = ProductionService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+BaseProductionService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     })
-], ProductionService);
+], BaseProductionService);
+
+
+
+/***/ }),
+
+/***/ "./src/services/production-owned.service.ts":
+/*!**************************************************!*\
+  !*** ./src/services/production-owned.service.ts ***!
+  \**************************************************/
+/*! exports provided: ProductionOwnedService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductionOwnedService", function() { return ProductionOwnedService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
+/* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product.service */ "./src/services/product.service.ts");
+/* harmony import */ var _production_base_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./production-base.service */ "./src/services/production-base.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+var ProductionOwnedService_1;
+
+
+
+
+
+
+let ProductionOwnedService = ProductionOwnedService_1 = class ProductionOwnedService extends _production_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseProductionService"] {
+    constructor(gapiSession, productService, route) {
+        super(gapiSession, productService, route);
+    }
+    getRange() {
+        return ProductionOwnedService_1.RANGE_PRODUCTION;
+    }
+    getRangeForAddingNewRow() {
+        return ProductionOwnedService_1.RANGE_PRODUCTION_ADD_ROW;
+    }
+    useOwnedProducts() {
+        return true;
+    }
+};
+ProductionOwnedService.RANGE_PRODUCTION = 'ControlProduccion!A2:C';
+ProductionOwnedService.RANGE_PRODUCTION_ADD_ROW = 'ControlProduccion!A2';
+ProductionOwnedService.ctorParameters = () => [
+    { type: src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
+    { type: _product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }
+];
+ProductionOwnedService = ProductionOwnedService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], ProductionOwnedService);
 
 
 
@@ -1750,6 +1842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product.service */ "./src/services/product.service.ts");
 /* harmony import */ var src_models_wasted_product_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/models/wasted-product.model */ "./src/models/wasted-product.model.ts");
 /* harmony import */ var src_models_wasted_line_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/models/wasted-line.model */ "./src/models/wasted-line.model.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 var WastedService_1;
 
 
@@ -1758,9 +1851,10 @@ var WastedService_1;
 
 
 
+
 let WastedService = WastedService_1 = class WastedService extends _base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"] {
-    constructor(gapiSession, productService) {
-        super();
+    constructor(gapiSession, productService, route) {
+        super(route);
         this.gapiSession = gapiSession;
         this.productService = productService;
         this._allWasted = [];
@@ -1784,7 +1878,7 @@ let WastedService = WastedService_1 = class WastedService extends _base_service_
             return gapi.client.request({
                 method: 'GET',
                 // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].SPREADSHEET_ID}/values/${WastedService_1.RANGE_WASTED}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].DATE_TIME_RENDER_OPTION}`
+                path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values/${WastedService_1.RANGE_WASTED}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].DATE_TIME_RENDER_OPTION}`
             }).then((productionRange) => {
                 this.productService.allOwnedProducts.forEach(p => {
                     this._allWasted.push(new src_models_wasted_product_model__WEBPACK_IMPORTED_MODULE_5__["WastedProduct"](p));
@@ -1827,7 +1921,7 @@ let WastedService = WastedService_1 = class WastedService extends _base_service_
         return gapi.client.request({
             method: 'POST',
             // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
-            path: `https://sheets.googleapis.com/v4/spreadsheets/${_base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].SPREADSHEET_ID}/values:batchUpdate`,
+            path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values:batchUpdate`,
             body: {
                 valueInputOption: _base_service__WEBPACK_IMPORTED_MODULE_3__["BaseService"].VALUE_INPUT_OPTION,
                 data: [
@@ -1844,7 +1938,8 @@ WastedService.RANGE_WASTED = 'ControlPerdidas!A2:C';
 WastedService.RANGE_WASTED_ADD_ROW = 'ControlPerdidas!A2';
 WastedService.ctorParameters = () => [
     { type: src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
-    { type: _product_service__WEBPACK_IMPORTED_MODULE_4__["ProductService"] }
+    { type: _product_service__WEBPACK_IMPORTED_MODULE_4__["ProductService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }
 ];
 WastedService = WastedService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
