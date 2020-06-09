@@ -1171,8 +1171,7 @@ var BaseService = /** @class */ (function () {
         configurable: true
     });
     BaseService.SPREADSHEET_ID_SAN_RA = '1B5cYzMJ4vc6ewk9RODCUqIVlYFqkWDrLToXrsUHIALs'; // ID of Esteban SanRafael spreadsheet vrs2, se toma del URL
-    //private static SPREADSHEET_ID_HEREDIA = '1s8HNrVy9F_OUjVH4lhYL372x4DyHjfB6wJsu-itE0SI'; // ID of Esteban Heredia spreadsheet vrs2, se toma del URL
-    BaseService.SPREADSHEET_ID_HEREDIA = '17fQVp0HY467cJpogubKXpNbnk9lkcDGpNzurTA6Mue8'; // Copy of hereria to work on it
+    BaseService.SPREADSHEET_ID_HEREDIA = '1IGb0tjWiIaQvfWOQdUeQbOSZiffJJQa_POunpXQJUmE'; // ID of Esteban Heredia spreadsheet vrs2, se toma del URL
     // From https://developers.google.com/sheets/api/guides/values:
     // USER_ENTERED = The input is parsed exactly as if it were entered into the Google Sheets UI, so "Mar 1 2016" becomes a date, and "=1+2" becomes a formula. Formats may also be inferred, so "$100.15" becomes a number with currency formatting.
     BaseService.VALUE_INPUT_OPTION = "USER_ENTERED";
