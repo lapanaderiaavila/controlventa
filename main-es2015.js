@@ -23,17 +23,6 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/app.component.html":
-/*!**************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/app.component.html ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n</div>\n\n<form class=\"form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n\t<div class=\"form-group row\" *ngIf=\"orden\" class=\"table-responsive-xl\">\n\t\t<!-- https://getbootstrap.com/docs/3.4/css/ -->\n\t\t<div class=\"row\">\n\t\t\t<div class=\"col col-md-2\">\n\t\t\t\t<!-- https://material.angular.io/components/autocomplete/overview -->\n\t\t\t\t<label>Producto</label>\n\t\t\t\t<input type=\"text\" placeholder=\"Producto\" class=\"form-control\" style=\"width: 250px;\" matInput [formControl]=\"control\" [matAutocomplete]=\"auto\" onfocus=\"this.select();\">\n\t\t\t\t<mat-autocomplete #auto=\"matAutocomplete\" [displayWith]=\"displayFn\" (optionSelected)=\"onProductSelected($event.option.value)\">\n\t\t\t\t\t<!--product is the current item you are iterating and value is the property you want to assign to the \"control\" once the user picks a product  --->\n\t\t\t\t\t<mat-option *ngFor=\"let detalleOrden of filteredProducts | async\" [value]=\"detalleOrden\">\n\t\t\t\t\t\t{{detalleOrden.producto.nombre}}\n\t\t\t\t\t</mat-option>\n\t\t\t\t</mat-autocomplete>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Precio</label>\n\t\t\t\t<input type=\"number\" placeholder=\"\" class=\"form-control input-number form-control-md text-right\" style=\"width: 50px; padding:0px;\" \n\t\t\t\t\t[(ngModel)]=\"manualDetalleOrden.producto.precio\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando || manualDetalleOrden.producto.id > 0\" onfocus=\"this.select();\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Vendido</label>\n\t\t\t\t<input type=\"number\" placeholder=\"\" class=\"form-control\" style=\"width: 50px;\" [(ngModel)]=\"manualDetalleOrden.vendido\" (ngModelChange)=\"calculateNewProduct()\"\n\t\t\t\t\t[ngModelOptions]=\"{standalone: true}\"  [disabled]=\"guardando\" onfocus=\"this.select();\"/>\n\t\t\t</div>\n\t\t\t<div class=\"col\">\n\t\t\t\t<label>Total:</label><BR/>\n\t\t\t\t<label>{{ manualDetalleOrden.total | currency:'CRC':true }}</label>\n\t\t\t</div>\n\t\t\t<div class=\"col text-center\" style=\"margin-top: 5px;\">\n\t\t\t\t<BR/>\n\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-md\" (click)=\"addProductToTable()\" [disabled]=\"guardando\">\n\t\t\t\t\tAgregar\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t\t<BR/>\n\n\t\t<table class=\"table table-hover table-striped \">\n\t\t\t<!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n\t\t\t<thead>\n\t\t\t\t<tr style=\"padding:0px;\">\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\"><h6>Vendido</h6></th>\n\t\t\t\t\t<th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n\t\t\t\t</tr>\n\t\t\t</thead>\n\n\t\t\t<tbody *ngIf=\"orden.detalleOrdenList\">\n\t\t\t\t<tr *ngFor=\"let detalleOrden of orden.detalleOrdenList\">\n\t\t\t\t\t<td style=\"padding:1px;\" (click)=\"detalleOrden.addVendido()\">\n\t\t\t\t\t\t{{ detalleOrden.producto.nombre }}\n\t\t\t\t\t\t<small>({{ detalleOrden.producto.precio | currency:'CRC':true }})</small>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding:1px;\">\n\t\t\t\t\t\t<div class=\"input-group\">\n\t\t\t\t\t\t\t<!--span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-success btn-number btn-sm\" data-type=\"plus\" (click)=\"detalleOrden.addVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-plus\" style=\"padding-left: 1rem; padding-right: 1rem;\">+</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span-->\n\t\t\t\t\t\t\t<input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 50px;\" [(ngModel)]=\"detalleOrden.vendido\" [ngModelOptions]=\"{standalone: true}\"\n\t\t\t\t\t\t\t\t\t(ngModelChange)=\"detalleOrden.onChangeVendido($event)\" onclick=\"this.select();\" [disabled]=\"guardando\"/>\n\t\t\t\t\t\t\t<span class=\"input-group-btn\">\n\t\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-danger btn-number btn-sm\" data-type=\"minus\" (click)=\"detalleOrden.minusVendido()\" [disabled]=\"guardando\">\n\t\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-minus\" style=\"padding-left: 1rem; padding-right: 1rem;\">-</span>\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td style=\"padding:1px; width: 150px; max-width: 150px;\" (click)=\"detalleOrden.addVendido()\">\n\t\t\t\t\t\t<h6 class=\"text-right\">{{ detalleOrden.total | currency:'CRC':true }}</h6>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td colspan=\"2\" class=\"text-right\">\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" style=\"margin-right: 20px;\"\n\t\t\t\t\t\t\t(click)=\"registrarVenta()\">\n\t\t\t\t\t\t\tGuardar\n\t\t\t\t\t\t</button>\n\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnTipoPago\" (click)=\"orden.toggleTipoPago()\">\n\t\t\t\t\t\t\t{{orden.tipoPago}}\n\t\t\t\t\t\t</button>\n\t\t\t\t\t</td>\n\t\t\t\t\t<td class=\"text-right\">\n\t\t\t\t\t\t<h5>{{orden.total | currency:'CRC':true }}</h5>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t</table>\n\t</div>\n\n</form>\n"
-
-/***/ }),
-
 /***/ "./node_modules/raw-loader/index.js!./src/app/gastos-component/gastos.component.html":
 /*!**********************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/gastos-component/gastos.component.html ***!
@@ -45,6 +34,17 @@ module.exports = "\n\t<div class=\"form-group row\" class=\"table-responsive-lg\
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/home-component/home.component.html":
+/*!******************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/home-component/home.component.html ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\n   <!--li class=\"nav-item\">\n     <a class=\"nav-link active\" id=\"ventas-tab\" data-toggle=\"tab\" href=\"#ventas\" role=\"tab\" aria-controls=\"ventas\" aria-selected=\"true\">Ventas</a>\n   </li-->\n   <li class=\"nav-item\">\n     <a class=\"nav-link\" id=\"gastos-tab\" data-toggle=\"tab\" href=\"#gastos\" role=\"tab\" aria-controls=\"gastos\" aria-selected=\"false\">Gastos</a>\n   </li>\n   <li class=\"nav-item\">\n     <a class=\"nav-link\" id=\"produccion-tab\" data-toggle=\"tab\" href=\"#produccion\" role=\"tab\" aria-controls=\"produccion\" aria-selected=\"false\">Produccion</a>\n   </li>\n   <li class=\"nav-item\">\n     <a class=\"nav-link\" id=\"perdidas-tab\" data-toggle=\"tab\" href=\"#perdidas\" role=\"tab\" aria-controls=\"perdidas\" aria-selected=\"false\">Perdidas</a>\n   </li>\n   <li class=\"nav-item\">\n      <a class=\"nav-link\" id=\"produccion-external-tab\" data-toggle=\"tab\" href=\"#produccion-external\" role=\"tab\" aria-controls=\"produccion-external\" aria-selected=\"false\">Externo</a>\n    </li>\n </ul>\n <div class=\"tab-content\" id=\"myTabContent\">\n   <!--div class=\"tab-pane fade show active\" id=\"ventas\" role=\"tabpanel\" aria-labelledby=\"ventas-tab\">\n     <app-root></app-root>\n   </div-->\n   <div class=\"tab-pane fade show active\" id=\"gastos\" role=\"tabpanel\" aria-labelledby=\"gastos-tab\">\n      <app-gastos-component></app-gastos-component>\n   </div>\n   <div class=\"tab-pane fade\" id=\"produccion\" role=\"tabpanel\" aria-labelledby=\"produccion-tab\">\n      <app-produccion-component [useOwnedProducts]=\"true\" mode=\"in\"></app-produccion-component>\n   </div>\n   <div class=\"tab-pane fade\" id=\"perdidas\" role=\"tabpanel\" aria-labelledby=\"perdidas-tab\">\n      <app-produccion-component [useOwnedProducts]=\"true\" mode=\"out\"></app-produccion-component>\n   </div>\n   <div class=\"tab-pane fade\" id=\"produccion-external\" role=\"tabpanel\" aria-labelledby=\"produccion-external-tab\">\n      <app-produccion-component [useOwnedProducts]=\"false\" mode=\"stock\"></app-produccion-component>\n    </div>\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/produccion-component/produccion.component.html":
 /*!******************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/produccion-component/produccion.component.html ***!
@@ -52,7 +52,7 @@ module.exports = "\n\t<div class=\"form-group row\" class=\"table-responsive-lg\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n   <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n </div>\n \n <form class=\"form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n   <table class=\"table table-hover table-striped \">\n      <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n      <thead>\n         <tr style=\"padding:0px;\">\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producido</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n         </tr>\n      </thead>\n\n      <tbody *ngIf=\"allProduction\">\n         <tr *ngFor=\"let productionProduct of allProduction\">\n            <td>\n               {{ productionProduct.product.nombre }}\n            </td>\n            <td>\n               <div class=\"input-group\">\n                  <input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 60px;\" [(ngModel)]=\"productionProduct.production\" [ngModelOptions]=\"{standalone: true}\" [disabled]=\"guardando\"/>\n               </div>\n            </td>\n            <td>\n               <h6 class=\"text-right\">{{ productionProduct.productionTotal }}</h6>\n            </td>\n         </tr>\n         <tr>\n            <td class=\"text-right\" colspan=\"2\">\n               <button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" (click)=\"saveProduction()\">\n                  Guardar\n               </button>\n            </td>\n            <td></td>\n         </tr>\n      </tbody>\n   </table>\n  </form>\n "
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n   <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n </div>\n \n <form class=\"form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n   <table class=\"table table-hover table-striped \">\n      <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n      <thead>\n         <tr style=\"padding:0px;\">\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\"><h6>{{col2Title}}</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n         </tr>\n      </thead>\n\n      <tbody *ngIf=\"allProduction\">\n         <tr *ngFor=\"let productionProduct of allProduction\">\n            <td>\n               {{ productionProduct.product.nombre }}\n            </td>\n            <td>\n               <div class=\"input-group\">\n                  <input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 60px;\" [(ngModel)]=\"productionProduct.production\" [ngModelOptions]=\"{standalone: true}\" [disabled]=\"guardando\"/>\n               </div>\n            </td>\n            <td>\n               <h6 class=\"text-right\">{{ productionProduct.productionTotal }}</h6>\n            </td>\n         </tr>\n         <tr>\n            <td class=\"text-right\" colspan=\"2\">\n               <button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" (click)=\"saveProduction()\">\n                  Guardar\n               </button>\n            </td>\n            <td></td>\n         </tr>\n      </tbody>\n   </table>\n  </form>\n "
 
 /***/ }),
 
@@ -80,15 +80,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _home_component_home_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home-component/home.component */ "./src/app/home-component/home.component.ts");
 
 
 
 
 const routes = [
-    { path: '', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
-    { path: 'controlventa', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] },
-    { path: 'panaderiaavila', component: _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"] }
+    { path: '', component: _home_component_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"] },
+    { path: 'controlventa', component: _home_component_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"] },
+    { path: 'panaderiaavila', component: _home_component_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -98,251 +98,6 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })
 ], AppRoutingModule);
-
-
-
-/***/ }),
-
-/***/ "./src/app/app.component.css":
-/*!***********************************!*\
-  !*** ./src/app/app.component.css ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/*input[type=number]{\r\n    width: 25px;\r\n} */\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUciLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qaW5wdXRbdHlwZT1udW1iZXJde1xyXG4gICAgd2lkdGg6IDI1cHg7XHJcbn0gKi8iXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/app.component.ts":
-/*!**********************************!*\
-  !*** ./src/app/app.component.ts ***!
-  \**********************************/
-/*! exports provided: AppComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
-/* harmony import */ var _services_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/product.service */ "./src/services/product.service.ts");
-/* harmony import */ var _models_order_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/order.model */ "./src/models/order.model.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-/* harmony import */ var src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/models/order-line.model */ "./src/models/order-line.model.ts");
-var AppComponent_1;
-
-
-
-
-
-
-
-
-
-let AppComponent = AppComponent_1 = class AppComponent {
-    constructor(productService, gapiSession, ngZone) {
-        this.productService = productService;
-        this.gapiSession = gapiSession;
-        this.ngZone = ngZone;
-        this.productsForDropDown = [];
-        this.allProductos = [];
-        this.productosForTable = [];
-        this.orden = null;
-        this.manualDetalleOrden = null;
-        this.test = "test";
-        this.guardando = false;
-        this.control = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"](); //used for the autocomplete text
-        this.filteredProducts = null;
-    }
-    ngOnInit() {
-        this.productService.initProductService().then(() => {
-            this.ngZone.run(() => {
-                this.productService.allProducts.forEach(p => {
-                    if (p.order > 0) {
-                        this.productosForTable.push(p);
-                    }
-                    // name, description, price
-                    this.productsForDropDown.push(new src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"](p, this.orden));
-                });
-                this.productosForTable = this.productosForTable.sort((p1, p2) => p1.order - p2.order);
-                this.orden = new _models_order_model__WEBPACK_IMPORTED_MODULE_4__["Order"](this.productosForTable);
-                this.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(this.orden);
-                // move the ones that are not shown in the table to the beginning
-                this.productsForDropDown = this.productsForDropDown.sort((p1, p2) => (p1.producto.order - p2.producto.order));
-                for (let detalleOrden in this.productsForDropDown) {
-                    this.productsForDropDown[detalleOrden].orden = this.orden;
-                }
-                // the value in control is an string while the user is typing, once the users selects a product from the list, it will be a DetalleOrden
-                this.filteredProducts = this.control.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["startWith"])(''), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(display => this._filter(display instanceof src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"] ? display.producto.nombre : display)));
-            });
-        });
-    }
-    registrarVenta() {
-        this.guardando = true;
-        const self = this;
-        const ventasToInsert = this.orden.getRowsForVenta();
-        // Registers the Efectivo and the Tarjeta
-        gapi.client.request({
-            method: 'POST',
-            // Applies one or more updates to the spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate 
-            path: `https://sheets.googleapis.com/v4/spreadsheets/${AppComponent_1.spreadsheetId}:batchUpdate`,
-            body: {
-                requests: [
-                    {
-                        // adds a all the products as new rows in `ControlVenta` starting at row 2 up to the number of products added
-                        insertDimension: {
-                            range: {
-                                sheetId: AppComponent_1.controlVentaSheetId,
-                                dimension: "ROWS",
-                                startIndex: 1,
-                                endIndex: 1 + ventasToInsert.length
-                            },
-                            inheritFromBefore: false
-                        }
-                    }
-                ]
-            }
-        }).then(function (response) {
-            gapi.client.request({
-                method: 'POST',
-                // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${AppComponent_1.spreadsheetId}/values:batchUpdate`,
-                body: {
-                    valueInputOption: AppComponent_1.valueInputOption,
-                    data: [
-                        {
-                            range: AppComponent_1.rangeControlVentaAddRow,
-                            values: ventasToInsert
-                        }
-                    ]
-                }
-            }).then(function (response) {
-                console.log(response);
-                self.ngZone.run(() => {
-                    console.log("resetting");
-                    self.orden.reset();
-                    self.guardando = false;
-                });
-            });
-        });
-    }
-    _filter(value) {
-        this._resetManualDetalle();
-        if (value) {
-            const filterValue = this._normalizeValue(value);
-            const productsMatched = this.productsForDropDown
-                .filter(p => this._normalizeValue(p.producto.nombre).includes(filterValue));
-            return productsMatched;
-        }
-        return this.productsForDropDown.slice();
-    }
-    _normalizeValue(value) {
-        return value ? value.toLowerCase().replace(/\s/g, '') : "";
-    }
-    _resetManualDetalle() {
-        if (this.manualDetalleOrden.producto.id > 0) {
-            this.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(this.orden);
-        }
-    }
-    displayFn(detalle) {
-        return detalle ? detalle.producto.nombre : undefined;
-    }
-    onProductSelected(productSelected) {
-        this.manualDetalleOrden = productSelected;
-    }
-    calculateNewProduct() {
-        this.manualDetalleOrden.calcularTotal();
-    }
-    addProductToTable() {
-        if (this.manualDetalleOrden.producto.id > 0) {
-            // the product already exist we just need to add it into the table
-            // inserts the new detail at the beginning of the table
-            let updated;
-            for (let detalleOrden in this.orden.detalleOrdenList) {
-                if (this.orden.detalleOrdenList[detalleOrden].producto.id == this.manualDetalleOrden.producto.id) {
-                    this.orden.detalleOrdenList[detalleOrden].vendido = this.manualDetalleOrden.vendido;
-                    this.orden.detalleOrdenList[detalleOrden].calcularTotal();
-                    updated = true;
-                    break;
-                }
-            }
-            if (!updated) {
-                this.orden.detalleOrdenList.unshift(this.manualDetalleOrden);
-            }
-            // clean the new product information to enter a new one
-            this.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(this.orden);
-            this.control.setValue("");
-            this.orden.calcularTotal();
-        }
-        else {
-            // if it gets here, means the product hasnt been registered so we need to add it into the product catalog (+1 because of the header)
-            this.manualDetalleOrden.producto.nombre = this.control.value;
-            // first lets validate the data
-            if (this.manualDetalleOrden.producto.nombre == "" ||
-                this.manualDetalleOrden.producto.precio <= 0 ||
-                this.manualDetalleOrden.vendido <= 0) {
-                return;
-            }
-            this.manualDetalleOrden.producto.id = this.allProductos.length + 1;
-            var newRowIndex = AppComponent_1.rangeCatalogosProductosAddRow + (2 + this.allProductos.length);
-            const self = this;
-            gapi.client.request({
-                method: 'POST',
-                // Sets values in one or more ranges of a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
-                path: `https://sheets.googleapis.com/v4/spreadsheets/${AppComponent_1.spreadsheetId}/values:batchUpdate`,
-                body: {
-                    valueInputOption: AppComponent_1.valueInputOption,
-                    data: [
-                        {
-                            range: newRowIndex,
-                            values: [
-                                self.manualDetalleOrden.producto.getRowForCatalogs()
-                            ]
-                        }
-                    ]
-                }
-            }).then(function (response) {
-                self.ngZone.run(() => {
-                    // saves the new product in all the arrays
-                    self.allProductos.push(self.manualDetalleOrden.producto);
-                    self.productsForDropDown.push(self.manualDetalleOrden);
-                    // inserts the new detail at the beginning of the table
-                    self.orden.detalleOrdenList.unshift(self.manualDetalleOrden);
-                    self.orden.calcularTotal();
-                    // clean the new product information to enter a new one
-                    self.manualDetalleOrden = src_models_order_line_model__WEBPACK_IMPORTED_MODULE_7__["OrderLine"].createEmptyDetalleOrden(self.orden);
-                    self.control.setValue("");
-                });
-            });
-        }
-    }
-};
-AppComponent.valueInputOption = "USER_ENTERED"; // RAW => https://developers.google.com/sheets/api/guides/values
-AppComponent.valueRenderOption = "UNFORMATTED_VALUE"; // RAW => https://developers.google.com/sheets/api/reference/rest/v4/ValueRenderOption
-AppComponent.dateTimeRenderOption = "FORMATTED_STRING"; // https://developers.google.com/sheets/api/reference/rest/v4/DateTimeRenderOption
-//private static spreadsheetId = '1oajvWQJIqPETOX-FxzFNvTcwf1K2KeuNnGKJ-aHGDmo'; // ID of Esteban spreadsheet vrs1, se toma del URL
-//private static spreadsheetId = '19ltkEfpGBfd7xiPx9UlpGwyhV2v-diAMgFom8XVrhD4'; // ID of Pedro spreadsheet vrs2, se toma del URL
-AppComponent.spreadsheetId = '1B5cYzMJ4vc6ewk9RODCUqIVlYFqkWDrLToXrsUHIALs'; // ID of Esteban spreadsheet vrs2, se toma del URL
-AppComponent.rangeControlVentaAddRow = 'ControlVenta!A2';
-AppComponent.rangeCatalogosProductos = 'CatalogoProductos!A2:E';
-AppComponent.rangeCatalogosProductosAddRow = 'CatalogoProductos!A';
-//private static controlVentaSheetId = 1798969314; // id de las versiones viejas, viene en el URL "#gid=0"
-AppComponent.controlVentaSheetId = 0; // id de las versiones nuevas, viene en el URL "#gid=0"
-AppComponent.ctorParameters = () => [
-    { type: _services_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"] },
-    { type: _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
-];
-AppComponent = AppComponent_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-root',
-        template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
-        styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-    })
-], AppComponent);
 
 
 
@@ -367,13 +122,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
 /* harmony import */ var _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/autocomplete */ "./node_modules/@angular/material/esm2015/autocomplete.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/locales/es-CR */ "./node_modules/@angular/common/locales/es-CR.js");
-/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./gastos-component/gastos.component */ "./src/app/gastos-component/gastos.component.ts");
-/* harmony import */ var _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./produccion-component/produccion.component */ "./src/app/produccion-component/produccion.component.ts");
-/* harmony import */ var _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./wasted-component/wasted.component */ "./src/app/wasted-component/wasted.component.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/locales/es-CR */ "./node_modules/@angular/common/locales/es-CR.js");
+/* harmony import */ var _angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./gastos-component/gastos.component */ "./src/app/gastos-component/gastos.component.ts");
+/* harmony import */ var _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./produccion-component/produccion.component */ "./src/app/produccion-component/produccion.component.ts");
+/* harmony import */ var _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./wasted-component/wasted.component */ "./src/app/wasted-component/wasted.component.ts");
+/* harmony import */ var _home_component_home_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./home-component/home.component */ "./src/app/home-component/home.component.ts");
+
+
+
+
+
+
 
 
 
@@ -383,13 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // root
-
-
-
-
-
-
-Object(_angular_common__WEBPACK_IMPORTED_MODULE_9__["registerLocaleData"])(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_10___default.a);
+Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["registerLocaleData"])(_angular_common_locales_es_CR__WEBPACK_IMPORTED_MODULE_9___default.a);
 function initApp(gapiSession) {
     return () => {
         gapiSession.initClient("module");
@@ -401,10 +156,11 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         // import components and directives to use
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
-            _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_11__["GastosComponent"],
-            _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_12__["ProduccionComponent"],
-            _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_13__["WastedComponent"]
+            //AppComponent,
+            _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_10__["GastosComponent"],
+            _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_11__["ProduccionComponent"],
+            _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_12__["WastedComponent"],
+            _home_component_home_component__WEBPACK_IMPORTED_MODULE_13__["HomeComponent"]
         ],
         // import other modules to use
         imports: [
@@ -443,7 +199,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         https://angular.io/guide/bootstrapping
           The root component(s) that Angular creates and inserts into the index.html host web page.
         */
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"], _gastos_component_gastos_component__WEBPACK_IMPORTED_MODULE_11__["GastosComponent"], _produccion_component_produccion_component__WEBPACK_IMPORTED_MODULE_12__["ProduccionComponent"], _wasted_component_wasted_component__WEBPACK_IMPORTED_MODULE_13__["WastedComponent"]]
+        bootstrap: [_home_component_home_component__WEBPACK_IMPORTED_MODULE_13__["HomeComponent"]]
     })
 ], AppModule);
 
@@ -577,6 +333,48 @@ GastosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/home-component/home.component.css":
+/*!***************************************************!*\
+  !*** ./src/app/home-component/home.component.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hvbWUtY29tcG9uZW50L2hvbWUuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/home-component/home.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/home-component/home.component.ts ***!
+  \**************************************************/
+/*! exports provided: HomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let HomeComponent = class HomeComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+};
+HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-home-component',
+        template: __webpack_require__(/*! raw-loader!./home.component.html */ "./node_modules/raw-loader/index.js!./src/app/home-component/home.component.html"),
+        styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/home-component/home.component.css")]
+    })
+], HomeComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/produccion-component/produccion.component.css":
 /*!***************************************************************!*\
   !*** ./src/app/produccion-component/produccion.component.css ***!
@@ -600,23 +398,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProduccionComponent", function() { return ProduccionComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var src_services_production_owned_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/production-owned.service */ "./src/services/production-owned.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-
+/* harmony import */ var src_services_production_control_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/production-control.service */ "./src/services/production-control.service.ts");
 
 
 
 let ProduccionComponent = class ProduccionComponent {
-    constructor(productionOwnedService, ngZone, route) {
-        this.productionOwnedService = productionOwnedService;
+    constructor(productionControlService, ngZone) {
+        this.productionControlService = productionControlService;
         this.ngZone = ngZone;
-        this.route = route;
+        this.useOwnedProducts = true;
+        this.mode = "in"; // possible values, in (means the production value entered will be added), out (means the production value will be substracted), stock (means the production value will be the new total in stock)
         this._processing = false;
         this._allProduction = [];
-        this.route.queryParams.subscribe(params => {
-            this._bakeryId = params['pana'];
-            console.log("this._bakeryId = " + this._bakeryId);
-        });
     }
     get allProduction() {
         return this._allProduction;
@@ -624,26 +417,40 @@ let ProduccionComponent = class ProduccionComponent {
     get processing() {
         return this._processing;
     }
+    get col2Title() {
+        return this._col2Title;
+    }
     ngOnInit() {
-        this.productionOwnedService.initProductionServiceService().then(() => {
+        if (this.useOwnedProducts) {
+            this._col2Title = this.mode == "in" ? "Producido" : (this.mode == "out" ? "Perdido" : "Inventario");
+        }
+        else {
+            this._col2Title = this.mode == "in" ? "Entrada" : (this.mode == "out" ? "Sobrante" : "Inventario");
+        }
+        this.productionControlService.initProductionServiceService().then(() => {
             this.ngZone.run(() => {
-                this._allProduction = this.productionOwnedService.allProduction;
+                this._allProduction = this.useOwnedProducts ? this.productionControlService.allProductionOwned : this.productionControlService.allProductionExternal;
             });
         });
     }
     saveProduction() {
-        this.productionOwnedService.saveProduction().then(() => {
+        this.productionControlService.saveProduction(this.mode).then(() => {
             this.ngZone.run(() => {
-                this._allProduction = this.productionOwnedService.allProduction;
+                this._allProduction = this.useOwnedProducts ? this.productionControlService.allProductionOwned : this.productionControlService.allProductionExternal;
             });
         });
     }
 };
 ProduccionComponent.ctorParameters = () => [
-    { type: src_services_production_owned_service__WEBPACK_IMPORTED_MODULE_2__["ProductionOwnedService"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+    { type: src_services_production_control_service__WEBPACK_IMPORTED_MODULE_2__["ProductionControlService"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgZone"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('useOwnedProducts')
+], ProduccionComponent.prototype, "useOwnedProducts", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('mode')
+], ProduccionComponent.prototype, "mode", void 0);
 ProduccionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-produccion-component',
@@ -938,176 +745,6 @@ Expense.ctorParameters = () => [
 
 /***/ }),
 
-/***/ "./src/models/order-line.model.ts":
-/*!****************************************!*\
-  !*** ./src/models/order-line.model.ts ***!
-  \****************************************/
-/*! exports provided: OrderLine */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderLine", function() { return OrderLine; });
-/* harmony import */ var _product_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product.model */ "./src/models/product.model.ts");
-/* harmony import */ var _payment_method_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-method.model */ "./src/models/payment-method.model.ts");
-/* harmony import */ var _order_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./order.model */ "./src/models/order.model.ts");
-
-
-
-class OrderLine {
-    constructor(producto, orden) {
-        this.vendido = 0;
-        this.feria = 0;
-        this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
-        this.total = 0;
-        this.producto = producto;
-        this.orden = orden;
-    }
-    // style guide / naming conventions 
-    // https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html#variable-and-function
-    static createEmptyDetalleOrden(orden) {
-        return new OrderLine(_product_model__WEBPACK_IMPORTED_MODULE_0__["Product"].createEmptyProduct(), orden);
-    }
-    onChangeVendido(vendido) {
-        this.vendido = vendido;
-        this.calcularTotal();
-    }
-    calcularTotal() {
-        if (!this.producto.precio || !this.vendido) {
-            this.total = 0;
-        }
-        else {
-            this.total = this.producto.precio * this.vendido;
-        }
-        this.orden.calcularTotal();
-    }
-    minusVendido() {
-        this.vendido = this.minus(this.vendido);
-        this.calcularTotal();
-    }
-    addVendido() {
-        this.vendido = this.add(this.vendido);
-        this.calcularTotal();
-    }
-    minusFeria() {
-        this.feria = this.minus(this.feria);
-    }
-    addFeria() {
-        this.feria = this.add(this.feria);
-    }
-    isEffectivo() {
-        return this.tipoPago == _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
-    }
-    minus(currentValue) {
-        currentValue = currentValue - 1;
-        return currentValue < 0 ? 0 : currentValue;
-    }
-    add(currentValue) {
-        currentValue = currentValue + 1;
-        return currentValue;
-    }
-}
-OrderLine.ctorParameters = () => [
-    { type: _product_model__WEBPACK_IMPORTED_MODULE_0__["Product"] },
-    { type: _order_model__WEBPACK_IMPORTED_MODULE_2__["Order"] }
-];
-
-
-/***/ }),
-
-/***/ "./src/models/order.model.ts":
-/*!***********************************!*\
-  !*** ./src/models/order.model.ts ***!
-  \***********************************/
-/*! exports provided: Order */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Order", function() { return Order; });
-/* harmony import */ var _order_line_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./order-line.model */ "./src/models/order-line.model.ts");
-/* harmony import */ var _payment_method_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./payment-method.model */ "./src/models/payment-method.model.ts");
-
-
-class Order {
-    constructor(productos) {
-        this.detalleOrdenList = [];
-        this.total = 0;
-        this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
-        for (var p in productos) {
-            this.detalleOrdenList.push(new _order_line_model__WEBPACK_IMPORTED_MODULE_0__["OrderLine"](productos[p], this));
-        }
-    }
-    reset() {
-        for (var detalleOrden in this.detalleOrdenList) {
-            this.detalleOrdenList[detalleOrden].tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
-            this.detalleOrdenList[detalleOrden].vendido = 0;
-            this.detalleOrdenList[detalleOrden].feria = 0;
-            this.detalleOrdenList[detalleOrden].calcularTotal();
-        }
-    }
-    calcularTotal() {
-        this.total = 0;
-        for (var detalleOrden in this.detalleOrdenList) {
-            this.total += this.detalleOrdenList[detalleOrden].total;
-        }
-    }
-    getRowsForVenta() {
-        let newVentas = new Array();
-        let now = new Date();
-        let date = now.toLocaleDateString() + " " + now.toLocaleTimeString();
-        for (var detalle in this.detalleOrdenList) {
-            var detalleOrden = this.detalleOrdenList[detalle];
-            if (detalleOrden.vendido > 0) {
-                var row = new Array();
-                row.push(date);
-                row.push(this.tipoPago == _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH ? "Efectivo" : "Tarjeta");
-                row.push(detalleOrden.producto.id + "");
-                row.push(detalleOrden.producto.precio + "");
-                row.push(detalleOrden.vendido + "");
-                row.push((detalleOrden.vendido * detalleOrden.producto.precio) + "");
-                newVentas.push(row);
-            }
-        }
-        return newVentas;
-    }
-    toggleTipoPago() {
-        switch (this.tipoPago) {
-            case _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH:
-                this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CREDIT_DEBIT;
-                break;
-            case _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CREDIT_DEBIT:
-                this.tipoPago = _payment_method_model__WEBPACK_IMPORTED_MODULE_1__["PaymentMethod"].CASH;
-                break;
-        }
-    }
-}
-Order.ctorParameters = () => [
-    { type: Array }
-];
-
-
-/***/ }),
-
-/***/ "./src/models/payment-method.model.ts":
-/*!********************************************!*\
-  !*** ./src/models/payment-method.model.ts ***!
-  \********************************************/
-/*! exports provided: PaymentMethod */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentMethod", function() { return PaymentMethod; });
-var PaymentMethod;
-(function (PaymentMethod) {
-    PaymentMethod["CREDIT_DEBIT"] = "Tarjeta";
-    PaymentMethod["CASH"] = "Efectivo";
-})(PaymentMethod || (PaymentMethod = {}));
-
-
-/***/ }),
-
 /***/ "./src/models/product.model.ts":
 /*!*************************************!*\
   !*** ./src/models/product.model.ts ***!
@@ -1145,6 +782,7 @@ class Product {
         return new Product(-1, "", -1, "", -1);
     }
     isOwned() {
+        console.log("propio == " + this.tipo.toLowerCase() + " ? " + ("propio" == this.tipo.toLowerCase()));
         return "propio" == this.tipo.toLowerCase();
     }
 }
@@ -1172,8 +810,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _product_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product.model */ "./src/models/product.model.ts");
 
 class ProductionLine {
-    constructor(product, date, production) {
+    constructor(product, date, production, stock) {
         this._production = 0;
+        this._stock = 0;
         this._product = product;
         this._date = date;
         this._production = production;
@@ -1194,6 +833,7 @@ class ProductionLine {
 ProductionLine.ctorParameters = () => [
     { type: _product_model__WEBPACK_IMPORTED_MODULE_0__["Product"] },
     { type: Date },
+    { type: Number },
     { type: Number }
 ];
 
@@ -1215,18 +855,34 @@ __webpack_require__.r(__webpack_exports__);
 class ProductionProduct {
     constructor(_product) {
         this._product = _product;
-        this._productionLines = [];
+        this._productionAllLines = [];
+        this._productionInLines = [];
+        this._productionOutLines = [];
         this._production = 0;
         this._productionTotal = 0;
+        this._productionInTotal = 0;
+        this._productionOutTotal = 0;
     }
     get product() {
         return this._product;
     }
-    get productionLines() {
-        return this._productionLines;
+    get productionAllLines() {
+        return this._productionAllLines;
+    }
+    get productionInLines() {
+        return this._productionInLines;
+    }
+    get productionOutLines() {
+        return this._productionOutLines;
     }
     get productionTotal() {
         return this._productionTotal;
+    }
+    get productionInTotal() {
+        return this._productionInTotal;
+    }
+    get productionOutTotal() {
+        return this._productionOutTotal;
     }
     get production() {
         return this._production;
@@ -1238,8 +894,16 @@ class ProductionProduct {
         if (productionLine.product.id != this._product.id) {
             throw new Error('Invalid product line for this product');
         }
+        this._productionAllLines.push(productionLine);
         this._productionTotal = this._productionTotal + productionLine.production;
-        this._productionLines.push(productionLine);
+        if (productionLine.production < 0) {
+            this._productionOutLines.push(productionLine);
+            this._productionOutTotal = this._productionOutTotal + productionLine.production;
+        }
+        else {
+            this._productionInLines.push(productionLine);
+            this._productionInTotal = this._productionInTotal + productionLine.production;
+        }
     }
 }
 ProductionProduct.ctorParameters = () => [
@@ -1365,7 +1029,8 @@ class BaseService {
     }
 }
 BaseService.SPREADSHEET_ID_SAN_RA = '1B5cYzMJ4vc6ewk9RODCUqIVlYFqkWDrLToXrsUHIALs'; // ID of Esteban SanRafael spreadsheet vrs2, se toma del URL
-BaseService.SPREADSHEET_ID_HEREDIA = '1s8HNrVy9F_OUjVH4lhYL372x4DyHjfB6wJsu-itE0SI'; // ID of Esteban Heredia spreadsheet vrs2, se toma del URL
+//private static SPREADSHEET_ID_HEREDIA = '1s8HNrVy9F_OUjVH4lhYL372x4DyHjfB6wJsu-itE0SI'; // ID of Esteban Heredia spreadsheet vrs2, se toma del URL
+BaseService.SPREADSHEET_ID_HEREDIA = '17fQVp0HY467cJpogubKXpNbnk9lkcDGpNzurTA6Mue8'; // Copy of hereria to work on it
 // From https://developers.google.com/sheets/api/guides/values:
 // USER_ENTERED = The input is parsed exactly as if it were entered into the Google Sheets UI, so "Mar 1 2016" becomes a date, and "=1+2" becomes a formula. Formats may also be inferred, so "$100.15" becomes a number with currency formatting.
 BaseService.VALUE_INPUT_OPTION = "USER_ENTERED";
@@ -1679,9 +1344,21 @@ let BaseProductionService = class BaseProductionService extends _base_service__W
         this.gapiSession = gapiSession;
         this.productService = productService;
         this._allProduction = [];
+        this._allProductionOwned = [];
+        this._allProductionExternal = [];
+        this._totalOfLines = 0;
     }
     get allProduction() {
         return this._allProduction;
+    }
+    get allProductionOwned() {
+        return this._allProductionOwned;
+    }
+    get allProductionExternal() {
+        return this._allProductionExternal;
+    }
+    get totalOfLines() {
+        return this._totalOfLines;
     }
     initProductionServiceService() {
         if (!this._initProductionServicePromise) {
@@ -1701,19 +1378,27 @@ let BaseProductionService = class BaseProductionService extends _base_service__W
                 // Returns a range of values from a spreadsheet => https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
                 path: `https://sheets.googleapis.com/v4/spreadsheets/${this.sheetId}/values/${this.getRange()}?valueRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].VALUE_RENDER_OPTION}&dateTimeRenderOption=${_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseService"].DATE_TIME_RENDER_OPTION}`
             }).then((productionRange) => {
-                let products = this.useOwnedProducts() ? this.productService.allOwnedProducts : this.productService.allExternalProducts;
+                let products = this.productService.allProducts;
                 products.forEach(p => {
-                    this._allProduction.push(new src_models_production_product_model__WEBPACK_IMPORTED_MODULE_6__["ProductionProduct"](p));
+                    const productionProduct = new src_models_production_product_model__WEBPACK_IMPORTED_MODULE_6__["ProductionProduct"](p);
+                    this._allProduction.push(productionProduct);
+                    if (p.isOwned()) {
+                        this._allProductionOwned.push(productionProduct);
+                    }
+                    else {
+                        this._allProductionExternal.push(productionProduct);
+                    }
                 });
                 this._initProductionServicePromiseSolved = true;
                 var productionList = productionRange.result["values"];
                 if (productionList) {
                     for (let i = 0; i < productionList.length; i++) {
                         var productionLineFromSheet = productionList[i];
-                        // 0 = Id Producto, 2 = Fecha,  1 = Producido
+                        this._totalOfLines += 1;
+                        // 0 = Id Producto, 1 = Tipo (not used here, but by the cierre), 2 = Fecha,  3 = Cantidad, 4 = Total
                         var productionByProduct = this._allProduction.find(pl => pl.product.id == productionLineFromSheet[0]);
                         if (productionByProduct) {
-                            var productionLine = new src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__["ProductionLine"](productionByProduct.product, productionLineFromSheet[1], productionLineFromSheet[2]);
+                            var productionLine = new src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__["ProductionLine"](productionByProduct.product, productionLineFromSheet[2], productionLineFromSheet[3], productionLineFromSheet[4]);
                             productionByProduct.addProductionLine(productionLine);
                         }
                         else {
@@ -1724,20 +1409,34 @@ let BaseProductionService = class BaseProductionService extends _base_service__W
             });
         });
     }
-    saveProduction() {
+    saveProduction(mode) {
+        //mode could be:
+        // - in : means the production will be added to the total
+        // - out : means the production will be substracted to the total
+        // - stock : means this is the new stock
         let productionListToSave = new Array();
+        let productionListToSaveAdd = new Array();
         this._allProduction.forEach(p => {
             if (p.production > 0) {
-                p.addProductionLine(new src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__["ProductionLine"](p.product, new Date(), p.production));
+                if (mode == "stock") {
+                    p.production = p.production - p.productionTotal;
+                }
+                else {
+                    if (mode == "out") {
+                        p.production = p.production * -1;
+                    } // else in == nothing to do
+                }
+                const productionLine = new src_models_production_line_model__WEBPACK_IMPORTED_MODULE_2__["ProductionLine"](p.product, new Date(), p.production, 0);
+                productionListToSaveAdd.push(productionLine);
                 p.production = 0;
-            }
-            p.productionLines.forEach(pl => {
                 var row = new Array();
-                row.push(pl.product.id);
-                row.push(pl.date);
-                row.push(pl.production);
+                row.push(productionLine.product.id);
+                row.push(productionLine.product.tipo);
+                row.push(productionLine.date);
+                row.push(productionLine.production);
+                row.push(p.productionTotal + productionLine.production);
                 productionListToSave.push(row);
-            });
+            }
         });
         // Registers the Efectivo and the Tarjeta
         return gapi.client.request({
@@ -1753,6 +1452,11 @@ let BaseProductionService = class BaseProductionService extends _base_service__W
                     }
                 ]
             }
+        }).then(() => {
+            productionListToSaveAdd.forEach(pl => {
+                this._allProduction.find(p => p.product.id == pl.product.id).addProductionLine(pl);
+                this._totalOfLines += 1;
+            });
         });
     }
 };
@@ -1771,55 +1475,56 @@ BaseProductionService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/services/production-owned.service.ts":
-/*!**************************************************!*\
-  !*** ./src/services/production-owned.service.ts ***!
-  \**************************************************/
-/*! exports provided: ProductionOwnedService */
+/***/ "./src/services/production-control.service.ts":
+/*!****************************************************!*\
+  !*** ./src/services/production-control.service.ts ***!
+  \****************************************************/
+/*! exports provided: ProductionControlService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductionOwnedService", function() { return ProductionOwnedService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductionControlService", function() { return ProductionControlService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/infrastructure/sessions/gapi.session */ "./src/infrastructure/sessions/gapi.session.ts");
 /* harmony import */ var _product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product.service */ "./src/services/product.service.ts");
 /* harmony import */ var _production_base_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./production-base.service */ "./src/services/production-base.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-var ProductionOwnedService_1;
+var ProductionControlService_1;
 
 
 
 
 
 
-let ProductionOwnedService = ProductionOwnedService_1 = class ProductionOwnedService extends _production_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseProductionService"] {
+let ProductionControlService = ProductionControlService_1 = class ProductionControlService extends _production_base_service__WEBPACK_IMPORTED_MODULE_4__["BaseProductionService"] {
     constructor(gapiSession, productService, route) {
         super(gapiSession, productService, route);
     }
     getRange() {
-        return ProductionOwnedService_1.RANGE_PRODUCTION;
+        return ProductionControlService_1.RANGE_PRODUCTION;
     }
     getRangeForAddingNewRow() {
-        return ProductionOwnedService_1.RANGE_PRODUCTION_ADD_ROW;
+        return ProductionControlService_1.RANGE_PRODUCTION_ADD_ROW + (this.totalOfLines + 2); // starts in A2
     }
     useOwnedProducts() {
         return true;
     }
 };
-ProductionOwnedService.RANGE_PRODUCTION = 'ControlProduccion!A2:C';
-ProductionOwnedService.RANGE_PRODUCTION_ADD_ROW = 'ControlProduccion!A2';
-ProductionOwnedService.ctorParameters = () => [
+ProductionControlService.SHEET_NAME = 'ControlEntradaSalidaProductos';
+ProductionControlService.RANGE_PRODUCTION = ProductionControlService_1.SHEET_NAME + '!A2:E';
+ProductionControlService.RANGE_PRODUCTION_ADD_ROW = ProductionControlService_1.SHEET_NAME + '!A';
+ProductionControlService.ctorParameters = () => [
     { type: src_infrastructure_sessions_gapi_session__WEBPACK_IMPORTED_MODULE_2__["GapiSession"] },
     { type: _product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }
 ];
-ProductionOwnedService = ProductionOwnedService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+ProductionControlService = ProductionControlService_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     })
-], ProductionOwnedService);
+], ProductionControlService);
 
 
 
