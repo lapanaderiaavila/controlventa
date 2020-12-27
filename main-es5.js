@@ -1262,6 +1262,7 @@ var ExpenseService = /** @class */ (function (_super) {
     ExpenseService.prototype.saveExpense = function (expense) {
         // determine the row where to insert or update the info
         var listoOfExpenseses = [];
+        var allExpenses = this._allExpenses;
         var rowIndexToUpdate = ExpenseService_1.RANGE_OCASIONAL_EXPENSES_ADD_ROW + (expense.id > 0 ? (1 + expense.id) : (2 + this._ocasionalExpenses.length));
         if (expense.recurrente) {
             listoOfExpenseses = this._recurrenteExpenses;
@@ -1289,7 +1290,7 @@ var ExpenseService = /** @class */ (function (_super) {
                 ]
             }
         }).then(function (response) {
-            this._allExpenses.push(expense);
+            allExpenses.push(expense);
             listoOfExpenseses.push(expense);
         });
     };
@@ -1878,7 +1879,7 @@ var WastedService = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\psaen\Desktop\Personal\PanaderiaAvila\Site\PanaderiaAvila\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Move\Personal\PanaderiaAvila\Site\PanaderiaAvila\src\main.ts */"./src/main.ts");
 
 
 /***/ })
