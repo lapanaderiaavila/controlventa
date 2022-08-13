@@ -52,7 +52,7 @@ module.exports = "<ul class=\"nav nav-tabs\" id=\"myTab\" role=\"tablist\">\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n   <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n </div>\n \n <form class=\"form-group\" (submit)=\"registrarVenta($event)\" style=\"margin: 0px; padding: 0px;\">\n   <table class=\"table table-hover table-striped \">\n      <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n      <thead>\n         <tr style=\"padding:0px;\">\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\"><h6>{{col2Title}}</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n         </tr>\n      </thead>\n\n      <tbody *ngIf=\"allProduction\">\n         <tr *ngFor=\"let productionProduct of allProduction\">\n            <td>\n               {{ productionProduct.product.nombre }}\n            </td>\n            <td>\n               <div class=\"input-group\">\n                  <input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 60px;\" [(ngModel)]=\"productionProduct.production\" [ngModelOptions]=\"{standalone: true}\" [disabled]=\"guardando\"/>\n               </div>\n            </td>\n            <td>\n               <h6 class=\"text-right\">{{ productionProduct.productionTotal }}</h6>\n            </td>\n         </tr>\n         <tr>\n            <td class=\"text-right\" colspan=\"2\">\n               <button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" (click)=\"saveProduction()\">\n                  Guardar\n               </button>\n            </td>\n            <td></td>\n         </tr>\n      </tbody>\n   </table>\n  </form>\n "
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n   <!--img width=\"300\" alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"-->\n </div>\n \n <form class=\"form-group\" style=\"margin: 0px; padding: 0px;\">\n   <table class=\"table table-hover table-striped \">\n      <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->\n      <thead>\n         <tr style=\"padding:0px;\">\n            <th style=\"padding:8px;\" scope=\"col\"><h6>Producto</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\"><h6>{{col2Title}}</h6></th>\n            <th style=\"padding:8px;\" scope=\"col\" class=\"text-right\"><h6>Total</h6></th>\n         </tr>\n      </thead>\n\n      <tbody *ngIf=\"allProduction\">\n         <tr *ngFor=\"let productionProduct of allProduction\">\n            <td>\n               {{ productionProduct.product.nombre }}\n            </td>\n            <td>\n               <div class=\"input-group\">\n                  <input type=\"number\" class=\"input-number form-control-md text-right\" style=\"height: 31px; width: 60px;\" [(ngModel)]=\"productionProduct.production\" [ngModelOptions]=\"{standalone: true}\" [disabled]=\"guardando\"/>\n               </div>\n            </td>\n            <td>\n               <h6 class=\"text-right\">{{ productionProduct.productionTotal }}</h6>\n            </td>\n         </tr>\n         <tr>\n            <td class=\"text-right\" colspan=\"2\">\n               <button type=\"button\" class=\"btn btn-primary btn-sm\" [disabled]=\"guardando\" name=\"btnGuardando\" (click)=\"saveProduction()\">\n                  Guardar\n               </button>\n            </td>\n            <td></td>\n         </tr>\n      </tbody>\n   </table>\n  </form>\n "
 
 /***/ }),
 
@@ -772,10 +772,9 @@ var Expense = /** @class */ (function () {
         if (this.recurrente) {
             if (!this.recurrencia) {
                 this.recurrencia = "Todos los " + this.fechaPagado.getDate() + " de cada mes";
-                row.push(this.recurrencia);
             }
-            if (this.recurrente)
-                row.push(this.montoReferencia);
+            row.push(this.recurrencia);
+            row.push(this.montoReferencia);
         }
         ;
         row.push(this.fechaPagado);
@@ -1879,7 +1878,7 @@ var WastedService = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Move\Personal\PanaderiaAvila\Site\PanaderiaAvila\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\psaen\OneDrive\Desktop\FL\PanaderiaAvila\Site\PanaderiaAvila\src\main.ts */"./src/main.ts");
 
 
 /***/ })
